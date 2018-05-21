@@ -1,0 +1,48 @@
+-- VERSION_4
+-- START DISKCACHE
+D:\eclipse workspace\.metadata\.plugins\org.eclipse.core.resources\.projects\wechat01\com.python.pydev.analysis\v2_indexcache
+app.migrations.__init__|1495179527832|D:\eclipse workspace\wechat01\app\migrations\__init__.py
+wechat01.wsgi|1495179204763|D:\eclipse workspace\wechat01\wechat01\wsgi.py
+app.admin|1495179527823|D:\eclipse workspace\wechat01\app\admin.py
+wechat01.settings|1495179555096|D:\eclipse workspace\wechat01\wechat01\settings.py
+wechat01.__init__|1495179204765|D:\eclipse workspace\wechat01\wechat01\__init__.py
+app.models|1495179527825|D:\eclipse workspace\wechat01\app\models.py
+app.tests|1495179527827|D:\eclipse workspace\wechat01\app\tests.py
+app.urls|1495183180574|D:\eclipse workspace\wechat01\app\urls.py
+wechat01.urls|1495179545210|D:\eclipse workspace\wechat01\wechat01\urls.py
+app.__init__|1495179527829|D:\eclipse workspace\wechat01\app\__init__.py
+app.views|1495351954917|D:\eclipse workspace\wechat01\app\views.py
+manage|1495179204731|D:\eclipse workspace\wechat01\manage.py
+-- END DISKCACHE
+-- START DICTIONARY
+5
+2=wechat01.wsgi
+1=wechat01.settings
+4=wechat01.urls
+5=app.urls
+3=app.views
+-- END DICTIONARY
+-- START TREE 1
+18
+all|1|ALLOWED_HOSTS!11@
+app|3|application!19@appId!27@appSecret!27@
+bas|1|BASE_DIR!11@
+dat|1|DATABASES!11@
+deb|1|DEBUG!11@
+ins|1|INSTALLED_APPS!11@
+lan|1|LANGUAGE_CODE!11@
+mid|1|MIDDLEWARE_CLASSES!11@
+roo|1|ROOT_URLCONF!11@
+sec|1|SECRET_KEY!11@
+sta|1|STATIC_URL!11@
+tem|1|TEMPLATES!11@
+tim|1|TIME_ZONE!11@
+tok|1|TOKEN!27@
+url|2|urlpatterns!35@urlpatterns!43@
+use|3|USE_I18N!11@USE_TZ!11@USE_L10N!11@
+ver|1|verify!26@
+wsg|1|WSGI_APPLICATION!11@
+-- END TREE
+-- START TREE 2
+0
+-- END TREE

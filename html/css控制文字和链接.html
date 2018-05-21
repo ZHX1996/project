@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+ <head>
+  <title></title>
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta http-equiv="content-type" content="text/html;charset=gb2312" />
+  <style type = "text/css">
+  	/*字符间距*/
+  	.class01{font-style:italic; letter-spacing:1.5em;}
+  	/*单词间距*/
+  	.class02{font-style:normal; word-spacing:1.5em; text-indent : 2em;}
+  	/*underline overline line-through*/
+  	.class03{text-decoration:underline;}
+  	/*首段空格*/
+  	.class04{text-indent:2em;}
+  	/*空白的处理 以及对齐方式*/
+    .class05{white-space:pre; text-align:center;} 
+    /*首字母大写 uppercase lowercase*/
+    .class06{text-transform:capitalize;}
+    /*控制文字为下标或上标 sub super top text-bottom*/
+    #id01{vertical-align:sub;}
+    #id02{vertical-align:middle;}
+    /*伪类*/
+    a:link{text-decoration:none; color:black;}
+    a:visited{text-decoration:line-through; color:red;}
+    a:hover{text-decoration:underline; color:blue;}
+    a:active{text-decoration:underline; color:gray;}
+    
+    input{width:180px; height:20px; border:2px solid gold;
+    	 background:pink; vertical-align:middle; line-height:20px;}
+    	 /*给input添加伪类*/
+    input:focus{background:blue;}
+  </style>
+ </head>
+ <body> 
+	<div id = "id03"> 
+	<a href = "http://www.baidu.com">百度一下你就知道</a> &nbsp;&nbsp;
+	<a href = "http://www.taobao.com">淘宝网</a>  &nbsp;&nbsp;
+<a href = "http://www.baidu.com"> <img src = "img/baidu.jpg"/> </a> 
+	</div>
+	
+	</br>
+	
+	<table width = "350px"; height = "80px"; border = "1"; cellpadding = "10"; cellspacing = "0">
+		<tr>
+    	<td>用户名：
+    	<input type = "text" name = "username">
+    </br></br>
+			&nbsp;&nbsp;密码：
+			<input type = "password" name = "pwd" maxlength = "16"></td>
+		</tr>
+  </table>
+  
+  </br>
+  <label>用户名：<input type = "text" name = "username"></label>
+  <label>密码：<input type = "password" name = "pwd"></label>
+	
+ 	<h1>不达成功誓不休。</h1>
+  <em class = "class02">我本倾斜 a fact</em> </br>  </br> 
+ 	<em>理想是人生的太阳。</em>
+ 	<p class = "class01">一件事实是一条没有性别的真理。a fact</p>
+ 	<p class = "class03">劳于读书，逸于作文。</p>
+ 	
+ 	<p class = "class04">说真话不应当是艰难的事情。我所谓真话不是指真理，</br>
+ 	也不是指正确的话。自己想什麽就讲什麽；
+自己怎麽想就怎麽说这就是说真话。 —— 巴金</p>
+	<p class = "class05">
+		花谢花飞花满天，
+		红消香断有谁怜？
+		游丝软细飘香榭，
+		落絮轻沾扑绣帘。
+	</p>
+	<p class = "class06">
+		the further distance in the world,is not between life and death, but when i stand in front of you, yet, i can not say:" i love you".
+	</p>
+	<p>X<span id = "id01">2</span></p>
+	<p><img src = "img/p1.jpg" id = "id02"/>抽取式面巾</p>
+ </body>
+</html>

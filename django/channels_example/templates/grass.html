@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    html, body{
+        min-width: 300px;
+    }
+</style>
+<body>
+    {% if q == None %}
+        请输入正确的查询码
+    {% else %}
+        <div class="caption caption_1" align="center">
+            <table>
+                <tr>
+                <td colspan="2" align="center">基本信息</td>
+                </tr>
+                <tr>
+                    <td>ID号：</td>
+                    <td>{{a_list.COWSFARMID}}</td>
+                </tr>
+                <tr>
+                    <td>名字：</td>
+                    <td>{{a_list.COWSFARMNAME}}</td>
+                </tr>
+                <tr>
+                    <td>面积：</td>
+                    <td>{{a_list.COWSFARMSIZE}}亩</td>
+                </tr>
+                <tr>
+                    <td>地址：</td>
+                    <td>{{a_list.COWSFARMLOC}}</td>
+                </tr>
+                <tr>
+                    <td>电话：</td>
+                    <td>{{a_list.COWSFARMPHONE}}</td>
+                </tr>
+                <tr>
+                <td colspan="2" align="center">环境信息</td>
+                </tr>
+                <tr>
+                    <td>采集日期：</td>
+                    <td>{{b_list.GATHERTIME}}</td>
+                </tr>
+                <tr>
+                    <td>PH值：</td>
+                    <td>{{b_list.ENVIRONMENTPH}}</td>
+                </tr>
+                <tr>
+                    <td>温度：</td>
+                    <td>{{b_list.ENVIRONMENTTEM}}摄氏度</td>
+                </tr>
+                <tr>
+                    <td>湿度：</td>
+                    <td>{{b_list.ENVIRONMENTHUM}}%</td>
+                </tr>
+                <tr>
+                <td colspan="2" align="center">奶牛信息</td>
+                </tr>
+                <tr>
+                    <td>奶牛RFID：</td>
+                    <td>{{c_list.COWSRFID}}</td>
+                </tr>
+                <tr>
+                    <td>产奶时间：</td>
+                    <td>{{c_list.PRODUCTTIME}}</td>
+                </tr>
+                <tr>
+                    <td>产奶量：</td>
+                    <td>{{c_list.MILKAMOUNT}}</td>
+                </tr>
+                <tr>
+                <td>图片：</td>
+                <td><img width="250px" height="150px" src="/static/upload/{{c_list.TAGEPC}}.jpg"></td>
+                </tr>
+            </table>
+        </div>
+    {% endif %}
+</body>
+</html>

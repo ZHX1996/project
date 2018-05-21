@@ -1,0 +1,13 @@
+MODULES_MANAGER_V2
+manage|D:\eclipse workspace\oracle\manage.py
+myapp.__init__|D:\eclipse workspace\oracle\myapp\__init__.py
+myapp.admin|D:\eclipse workspace\oracle\myapp\admin.py
+myapp.migrations.0001_initial|D:\eclipse workspace\oracle\myapp\migrations\0001_initial.py
+myapp.migrations.__init__|D:\eclipse workspace\oracle\myapp\migrations\__init__.py
+myapp.models|D:\eclipse workspace\oracle\myapp\models.py
+myapp.tests|D:\eclipse workspace\oracle\myapp\tests.py
+myapp.views|D:\eclipse workspace\oracle\myapp\views.py
+oracle.__init__|D:\eclipse workspace\oracle\oracle\__init__.py
+oracle.settings|D:\eclipse workspace\oracle\oracle\settings.py
+oracle.urls|D:\eclipse workspace\oracle\oracle\urls.py
+oracle.wsgi|D:\eclipse workspace\oracle\oracle\wsgi.py

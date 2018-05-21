@@ -1,0 +1,36 @@
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+
+from wechatpy.utils import check_signature  
+from wechatpy.exceptions import InvalidSignatureException
+from wechatpy import parse_message, create_reply
+from wechatpy.replies import BaseReply
+# Create your views here.
+TOKEN = 'ZHX1996'
+@csrf_exempt
+class Handle(object):
+    def verify(self, request):
+        if request.method == 'GET':
+            signature = request.GET.get('signature', None)
+            timestamp = request.GET.get('timestamp', None)
+            nonce = request.GET.get('nonce', None)
+            echostr = request.GET.get('echostr', None)
+            try:  
+                check_signature(TOKEN, signature, timestamp, nonce)  
+            except InvalidSignatureException:  
+                echostr = 'error'        
+            response = HttpResponse(echostr, content_type="text/plain")
+            return response
+        else:
+            reply = None
+            msg = parse_message(request.body)
+            if msg.type == "text":
+                reply = "text"
+        if not reply or not isinstance(reply, BaseReply):
+            reply = "success"
+        
+        response = HttpResponse(reply.render(), content_type = 'application/xml')
+        return response
+            
+            
+

@@ -1,0 +1,47 @@
+-- VERSION_4
+-- START DISKCACHE
+D:\eclipse workspace\.metadata\.plugins\org.eclipse.core.resources\.projects\ShowPic\com.python.pydev.analysis\v2_indexcache
+ShowPic.__init__|1491529400839|D:\eclipse workspace\ShowPic\ShowPic\__init__.py
+ShowPic.urls|1491733462953|D:\eclipse workspace\ShowPic\ShowPic\urls.py
+ShowPic.settings|1491734172062|D:\eclipse workspace\ShowPic\ShowPic\settings.py
+MyApp.admin|1491529517309|D:\eclipse workspace\ShowPic\MyApp\admin.py
+MyApp.tests|1491529517311|D:\eclipse workspace\ShowPic\MyApp\tests.py
+MyApp.models|1491529517310|D:\eclipse workspace\ShowPic\MyApp\models.py
+MyApp.views|1491804231166|D:\eclipse workspace\ShowPic\MyApp\views.py
+ShowPic.wsgi|1491529400838|D:\eclipse workspace\ShowPic\ShowPic\wsgi.py
+MyApp.migrations.__init__|1491529517317|D:\eclipse workspace\ShowPic\MyApp\migrations\__init__.py
+MyApp.urls|1491733458983|D:\eclipse workspace\ShowPic\MyApp\urls.py
+MyApp.__init__|1491529517314|D:\eclipse workspace\ShowPic\MyApp\__init__.py
+manage|1491529400791|D:\eclipse workspace\ShowPic\manage.py
+-- END DISKCACHE
+-- START DICTIONARY
+5
+4=ShowPic.urls
+1=ShowPic.settings
+3=MyApp.views
+2=ShowPic.wsgi
+5=MyApp.urls
+-- END DICTIONARY
+-- START TREE 1
+17
+all|1|ALLOWED_HOSTS!11@
+app|1|application!19@
+bas|1|BASE_DIR!11@
+dat|1|DATABASES!11@
+deb|1|DEBUG!11@
+ind|1|index!26@
+ins|1|INSTALLED_APPS!11@
+lan|1|LANGUAGE_CODE!11@
+mid|1|MIDDLEWARE_CLASSES!11@
+roo|1|ROOT_URLCONF!11@
+sec|1|SECRET_KEY!11@
+sta|2|STATIC_URL!11@STATICFILES_DIRS!11@
+tem|1|TEMPLATES!11@
+tim|1|TIME_ZONE!11@
+url|2|urlpatterns!35@urlpatterns!43@
+use|3|USE_L10N!11@USE_I18N!11@USE_TZ!11@
+wsg|1|WSGI_APPLICATION!11@
+-- END TREE
+-- START TREE 2
+0
+-- END TREE

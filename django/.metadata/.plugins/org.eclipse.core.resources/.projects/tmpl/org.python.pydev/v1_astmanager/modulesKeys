@@ -1,0 +1,13 @@
+MODULES_MANAGER_V2
+learn.__init__|D:\eclipse workspace\tmpl\learn\__init__.py
+learn.admin|D:\eclipse workspace\tmpl\learn\admin.py
+learn.apps|D:\eclipse workspace\tmpl\learn\apps.py
+learn.migrations.__init__|D:\eclipse workspace\tmpl\learn\migrations\__init__.py
+learn.models|D:\eclipse workspace\tmpl\learn\models.py
+learn.tests|D:\eclipse workspace\tmpl\learn\tests.py
+learn.views|D:\eclipse workspace\tmpl\learn\views.py
+manage|D:\eclipse workspace\tmpl\manage.py
+tmpl.__init__|D:\eclipse workspace\tmpl\tmpl\__init__.py
+tmpl.settings|D:\eclipse workspace\tmpl\tmpl\settings.py
+tmpl.urls|D:\eclipse workspace\tmpl\tmpl\urls.py
+tmpl.wsgi|D:\eclipse workspace\tmpl\tmpl\wsgi.py

@@ -1,0 +1,57 @@
+-- VERSION_4
+-- START DISKCACHE
+D:\eclipse workspace\.metadata\.plugins\org.eclipse.core.resources\.projects\forms\com.python.pydev.analysis\v2_indexcache
+forms.wsgi|1484121410226|D:\eclipse workspace\forms\forms\wsgi.py
+tools.__init__|1484121421951|D:\eclipse workspace\forms\tools\__init__.py
+tools.views|1484123633141|D:\eclipse workspace\forms\tools\views.py
+tools.admin|1484121421937|D:\eclipse workspace\forms\tools\admin.py
+tools.models|1484121421943|D:\eclipse workspace\forms\tools\models.py
+manage|1484121410213|D:\eclipse workspace\forms\manage.py
+tools.apps|1484121421940|D:\eclipse workspace\forms\tools\apps.py
+tools.tests|1484121421946|D:\eclipse workspace\forms\tools\tests.py
+forms.__init__|1484121410228|D:\eclipse workspace\forms\forms\__init__.py
+tools.migrations.__init__|1484121421955|D:\eclipse workspace\forms\tools\migrations\__init__.py
+forms.settings|1484123225990|D:\eclipse workspace\forms\forms\settings.py
+forms.urls|1484123327937|D:\eclipse workspace\forms\forms\urls.py
+tools.forms|1484123219591|D:\eclipse workspace\forms\tools\forms.py
+-- END DISKCACHE
+-- START DICTIONARY
+8
+8=ToolsConfig
+2=forms.settings
+3=forms.wsgi
+4=tools.views
+7=AddForm
+6=forms.urls
+1=tools.forms
+5=tools.apps
+-- END DICTIONARY
+-- START TREE 1
+20
+add|1|AddForm!9@
+all|1|ALLOWED_HOSTS!19@
+app|1|application!27@
+aut|1|AUTH_PASSWORD_VALIDATORS!19@
+bas|1|BASE_DIR!19@
+dat|1|DATABASES!19@
+deb|1|DEBUG!19@
+ind|1|index!34@
+ins|1|INSTALLED_APPS!19@
+lan|1|LANGUAGE_CODE!19@
+mid|1|MIDDLEWARE_CLASSES!19@
+roo|1|ROOT_URLCONF!19@
+sec|1|SECRET_KEY!19@
+sta|1|STATIC_URL!19@
+tem|1|TEMPLATES!19@
+tim|1|TIME_ZONE!19@
+too|1|ToolsConfig!41@
+url|1|urlpatterns!51@
+use|3|USE_I18N!19@USE_L10N!19@USE_TZ!19@
+wsg|1|WSGI_APPLICATION!19@
+-- END TREE
+-- START TREE 2
+3
+a|1|a!7&11@
+b|1|b!7&11@
+nam|1|name!8&43@
+-- END TREE

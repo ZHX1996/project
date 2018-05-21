@@ -1,0 +1,76 @@
+-- VERSION_4
+-- START DISKCACHE
+D:\eclipse workspace\.metadata\.plugins\org.eclipse.core.resources\.projects\permission\com.python.pydev.analysis\v2_indexcache
+permission.urls|1494208556337|D:\eclipse workspace\permission\permission\urls.py
+app.models|1493715517951|D:\eclipse workspace\permission\app\models.py
+app.tests|1493544983992|D:\eclipse workspace\permission\app\tests.py
+app.__init__|1493544983992|D:\eclipse workspace\permission\app\__init__.py
+permission.__init__|1493171919386|D:\eclipse workspace\permission\permission\__init__.py
+manage|1493171919308|D:\eclipse workspace\permission\manage.py
+app.migrations.0001_initial|1493563737582|D:\eclipse workspace\permission\app\migrations\0001_initial.py
+app.migrations.__init__|1493544983992|D:\eclipse workspace\permission\app\migrations\__init__.py
+app.admin|1493566560692|D:\eclipse workspace\permission\app\admin.py
+permission.wsgi|1493171919386|D:\eclipse workspace\permission\permission\wsgi.py
+app.migrations.0002_auto_20170502_1405|1493705125094|D:\eclipse workspace\permission\app\migrations\0002_auto_20170502_1405.py
+permission.views|1494209186157|D:\eclipse workspace\permission\permission\views.py
+app.views|1493544983992|D:\eclipse workspace\permission\app\views.py
+permission.settings|1494209194859|D:\eclipse workspace\permission\permission\settings.py
+-- END DISKCACHE
+-- START DICTIONARY
+14
+8=permission.urls
+4=app.models
+11=Migration
+13=ContactAdmin
+12=TagInline
+9=Contact
+6=app.migrations.0001_initial
+3=app.admin
+2=permission.wsgi
+14=Test
+7=app.migrations.0002_auto_20170502_1405
+5=permission.views
+1=permission.settings
+10=Tag
+-- END DICTIONARY
+-- START TREE 1
+22
+all|1|ALLOWED_HOSTS!11@
+app|1|application!19@
+bas|1|BASE_DIR!11@
+con|2|ContactAdmin!25@Contact!33@
+dat|1|DATABASES!11@
+deb|1|DEBUG!11@
+hom|1|home!42@
+ins|1|INSTALLED_APPS!11@
+lan|1|LANGUAGE_CODE!11@
+log|1|LOGIN_REDIRECT_URL!11@
+mid|1|MIDDLEWARE_CLASSES!11@
+mig|2|Migration!49@Migration!57@
+roo|1|ROOT_URLCONF!11@
+sec|1|SECRET_KEY!11@
+sta|1|STATIC_URL!11@
+tag|2|Tag!33@TagInline!25@
+tem|1|TEMPLATES!11@
+tes|1|Test!33@
+tim|1|TIME_ZONE!11@
+url|1|urlpatterns!67@
+use|3|USE_L10N!11@USE_TZ!11@USE_I18N!11@
+wsg|1|WSGI_APPLICATION!11@
+-- END TREE
+-- START TREE 2
+13
+__u|2|__unicode__!9&34@__unicode__!10&34@
+age|1|age!9&35@
+con|1|contact!10&35@
+dep|2|dependencies!11&51@dependencies!11&59@
+ema|1|email!9&35@
+ext|1|extra!12&27@
+fie|1|fieldsets!13&27@
+inl|1|inlines!13&27@
+lis|1|list_display!13&27@
+mod|1|model!12&27@
+nam|3|name!14&35@name!9&35@name!10&35@
+ope|2|operations!11&59@operations!11&51@
+sea|1|search_fields!13&27@
+-- END TREE

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    html, body{
+        min-width: 300px;
+    }
+</style>
+<body>
+    {% if q == None %}
+    请输入正确的查询码
+    {% else %}
+        <div class="caption caption_2" align="center">
+            <table>
+                <tr>
+                <td colspan="2" align="center">牛奶加工信息</td>
+                </tr>
+                <tr>
+                    <td>加工厂ID：</td>
+                    <td>{{d_list.FACTORYID}}</td>
+                </tr>
+                <tr>
+                    <td>加工厂：</td>
+                    <td>{{d_list.FACTORYNAME}}</td>
+                </tr>
+                <tr>
+                    <td>加工时间：</td>
+                    <td>{{d_list.PROCESSTIME}}</td>
+                </tr>
+                <tr>
+                    <td>包装：</td>
+                    <td>{{d_list.PACKMATERIAL}}</td>
+                </tr>
+                <tr>
+                    <td>添加剂：</td>
+                    <td>{{d_list.SUPPLEMENTNAME}}</td>
+                </tr>
+                <tr>
+                <td colspan="2" align="center">每瓶牛奶信息</td>
+                </tr>
+                <tr>
+                    <td>牛奶类型：</td>
+                    <td>{{e_list.PRODUCTIONTYPE}}</td>
+                </tr>
+                <tr>
+                    <td>标准号：</td>
+                    <td>{{e_list.HSCODE}}</td>
+                </tr>
+                <tr>
+                    <td>保存方式：</td>
+                    <td>{{e_list.STORE}}</td>
+                </tr>
+                <tr>
+                    <td>生产日期：</td>
+                    <td>{{e_list.PRODUCTIONDATE}}</td>
+                </tr>
+                <tr>
+                    <td>保质期：</td>
+                    <td>{{e_list.EXPIRATIONDATE}}</td>
+                </tr>
+                <tr>
+                    <td>制造商：</td>
+                    <td>{{e_list.MANUFACTURER}}</td>
+                </tr>
+                <tr>
+                    <td>厂址：</td>
+                    <td>{{e_list.MANUFACTURERLOC}}</td>
+                </tr>
+                <tr>
+                    <td>净含量：</td>
+                    <td>{{e_list.NETCONTENT}}</td>
+                </tr>
+                <tr>
+                    <td>官网：</td>
+                    <td>{{e_list.OFFICIALWEBSITE}}</td>
+                </tr>
+            </table>
+        </div>
+    {% endif %}
+</body>
+</html>

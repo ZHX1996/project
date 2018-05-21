@@ -1,0 +1,51 @@
+-- VERSION_4
+-- START DISKCACHE
+D:\eclipse workspace\.metadata\.plugins\org.eclipse.core.resources\.projects\tmpl\com.python.pydev.analysis\v2_indexcache
+learn.models|1483949067612|D:\eclipse workspace\tmpl\learn\models.py
+learn.tests|1483949067617|D:\eclipse workspace\tmpl\learn\tests.py
+tmpl.wsgi|1483948973782|D:\eclipse workspace\tmpl\tmpl\wsgi.py
+learn.views|1483954029352|D:\eclipse workspace\tmpl\learn\views.py
+learn.apps|1483949067610|D:\eclipse workspace\tmpl\learn\apps.py
+tmpl.settings|1483951395929|D:\eclipse workspace\tmpl\tmpl\settings.py
+learn.__init__|1483949067622|D:\eclipse workspace\tmpl\learn\__init__.py
+learn.migrations.__init__|1483949067626|D:\eclipse workspace\tmpl\learn\migrations\__init__.py
+tmpl.urls|1483951390317|D:\eclipse workspace\tmpl\tmpl\urls.py
+tmpl.__init__|1483948973783|D:\eclipse workspace\tmpl\tmpl\__init__.py
+learn.admin|1483949067605|D:\eclipse workspace\tmpl\learn\admin.py
+manage|1483948973747|D:\eclipse workspace\tmpl\manage.py
+-- END DISKCACHE
+-- START DICTIONARY
+6
+2=tmpl.wsgi
+3=learn.views
+4=learn.apps
+6=LearnConfig
+1=tmpl.settings
+5=tmpl.urls
+-- END DICTIONARY
+-- START TREE 1
+19
+all|1|ALLOWED_HOSTS!11@
+app|1|application!19@
+aut|1|AUTH_PASSWORD_VALIDATORS!11@
+bas|1|BASE_DIR!11@
+dat|1|DATABASES!11@
+deb|1|DEBUG!11@
+hom|1|home!26@
+ins|1|INSTALLED_APPS!11@
+lan|1|LANGUAGE_CODE!11@
+lea|1|LearnConfig!33@
+mid|1|MIDDLEWARE_CLASSES!11@
+roo|1|ROOT_URLCONF!11@
+sec|1|SECRET_KEY!11@
+sta|1|STATIC_URL!11@
+tem|1|TEMPLATES!11@
+tim|1|TIME_ZONE!11@
+url|1|urlpatterns!43@
+use|3|USE_I18N!11@USE_TZ!11@USE_L10N!11@
+wsg|1|WSGI_APPLICATION!11@
+-- END TREE
+-- START TREE 2
+1
+nam|1|name!6&35@
+-- END TREE

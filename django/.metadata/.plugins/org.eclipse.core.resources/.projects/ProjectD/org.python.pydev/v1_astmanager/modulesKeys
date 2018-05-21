@@ -1,0 +1,14 @@
+MODULES_MANAGER_V2
+ProjectD.Permission|D:\eclipse workspace\ProjectD\ProjectD\Permission.py
+ProjectD.__init__|D:\eclipse workspace\ProjectD\ProjectD\__init__.py
+ProjectD.settings|D:\eclipse workspace\ProjectD\ProjectD\settings.py
+ProjectD.urls|D:\eclipse workspace\ProjectD\ProjectD\urls.py
+ProjectD.wsgi|D:\eclipse workspace\ProjectD\ProjectD\wsgi.py
+Search.__init__|D:\eclipse workspace\ProjectD\Search\__init__.py
+Search.admin|D:\eclipse workspace\ProjectD\Search\admin.py
+Search.migrations.__init__|D:\eclipse workspace\ProjectD\Search\migrations\__init__.py
+Search.models|D:\eclipse workspace\ProjectD\Search\models.py
+Search.tests|D:\eclipse workspace\ProjectD\Search\tests.py
+Search.urls|D:\eclipse workspace\ProjectD\Search\urls.py
+Search.views|D:\eclipse workspace\ProjectD\Search\views.py
+manage|D:\eclipse workspace\ProjectD\manage.py

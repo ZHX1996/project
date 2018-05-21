@@ -1,0 +1,13 @@
+MODULES_MANAGER_V2
+MyApp.__init__|D:\eclipse workspace\ShowPic\MyApp\__init__.py
+MyApp.admin|D:\eclipse workspace\ShowPic\MyApp\admin.py
+MyApp.migrations.__init__|D:\eclipse workspace\ShowPic\MyApp\migrations\__init__.py
+MyApp.models|D:\eclipse workspace\ShowPic\MyApp\models.py
+MyApp.tests|D:\eclipse workspace\ShowPic\MyApp\tests.py
+MyApp.urls|D:\eclipse workspace\ShowPic\MyApp\urls.py
+MyApp.views|D:\eclipse workspace\ShowPic\MyApp\views.py
+ShowPic.__init__|D:\eclipse workspace\ShowPic\ShowPic\__init__.py
+ShowPic.settings|D:\eclipse workspace\ShowPic\ShowPic\settings.py
+ShowPic.urls|D:\eclipse workspace\ShowPic\ShowPic\urls.py
+ShowPic.wsgi|D:\eclipse workspace\ShowPic\ShowPic\wsgi.py
+manage|D:\eclipse workspace\ShowPic\manage.py

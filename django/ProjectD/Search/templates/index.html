@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+		<link rel="stylesheet" href="http://apps.bdimg.com/libs/jquerymobile/1.4.2/jquery.mobile.min.css">
+		<script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script src="http://apps.bdimg.com/libs/jquerymobile/1.4.2/jquery.mobile.min.js"></script>
+	</head>
+	
+	<script>
+		var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth; 
+		$(document).ready(function(){
+			$('.type').find('li').bind('click', function(){
+				$('.caption').removeClass('show');	
+				 var index = $(this).attr('class').split('_')[1];
+				 var cation_name = '.caption_' +  index;
+				 var cap = $(caption_name).addClass("show");
+				 console.log(cap.attr('class'));
+				});
+			$('.caption_1').addClass("show");
+			
+			});
+	</script>
+	
+	<style>
+		ul{
+		list-style:none;
+		}
+		ul li{float:left;width:20%;} 
+		*{
+			margin:0;
+			padding:0;
+		}
+		table{font-size:2em;}	 
+		.caption {
+		 display: none;
+		}	 
+		body .show {
+		display: block;
+		}
+		.visual {   
+			margin: 0 auto;
+		}
+	</style>
+	
+	<body>
+	<div data-role="page">
+		<div data-role="header">
+			<h1>查询结果</h1>
+		</div>
+		<div class="visual">	
+			<div class="type">
+				<ul data-role="navbar">
+					<li class="tab_1"><a data-icon="info" class="ui-btn-active">牧场信息</a></li>
+					<li class="tab_2"><a data-icon="info">奶厂信息</a></li>
+					<li class="tab_3"><a data-icon="info">仓储信息</a></li>
+					<li class="tab_4"><a data-icon="info">物流信息</a></li>
+					<li class="tab_5"><a data-icon="info">销售信息</a></li>
+				</ul>
+			</div>
+		
+			<div class="caption caption_1" align="center">
+				<table>
+					<tr>
+					<td colspan="2" align="center">基本信息</td>
+					</tr>
+					<tr>
+						<td>ID号：</td>
+						<td>{{a_list.COWSFARMID}}</td>
+					</tr>
+					<tr>
+						<td>名字：</td>
+						<td>{{a_list.COWSFARMNAME}}</td>
+					</tr>
+					<tr>
+						<td>面积：</td>
+						<td>{{a_list.COWSFARMSIZE}}亩</td>
+					</tr>
+					<tr>
+						<td>地址：</td>
+						<td>{{a_list.COWSFARMLOC}}</td>
+					</tr>
+					<tr>
+						<td>电话：</td>
+						<td>{{a_list.COWSFARMPHONE}}</td>
+					</tr>				
+					<tr>
+					<td colspan="2" align="center">环境信息</td>
+					</tr>
+					<tr>
+						<td>采集日期：</td>
+						<td>{{b_list.GATHERTIME}}</td>
+					</tr>
+					<tr>
+						<td>PH值：</td>
+						<td>{{b_list.ENVIRONMENTPH}}</td>
+					</tr>
+					<tr>
+						<td>温度：</td>
+						<td>{{b_list.ENVIRONMENTTEM}}摄氏度</td>
+					</tr>
+					<tr>
+						<td>湿度：</td>
+						<td>{{b_list.ENVIRONMENTHUM}}%</td>
+					</tr>
+					<tr>
+					<td colspan="2" align="center">奶牛信息</td>
+					</tr>
+					<tr>
+						<td>奶牛RFID：</td>
+						<td>{{c_list.COWSRFID}}</td>
+					</tr>
+					<tr>
+						<td>产奶时间：</td>
+						<td>{{c_list.PRODUCTTIME}}</td>
+					</tr>
+					<tr>
+						<td>产奶量：</td>
+						<td>{{c_list.MILKAMOUNT}}</td>
+					</tr>
+					<tr>
+					<td>图片：</td>
+					<td><img src="/static/{{c_list.TAGEPC}}.jpg"></td>
+					</tr>
+				</table>
+			</div>
+			<div class="caption caption_2" align="center">
+				<table>
+					<tr>
+					<td colspan="2" align="center">牛奶加工信息</td>
+					</tr>
+					<tr>
+						<td>加工厂ID：</td>
+						<td>{{d_list.FACTORYID}}</td>
+					</tr>
+					<tr>
+						<td>加工厂：</td>
+						<td>{{d_list.FACTORYNAME}}</td>
+					</tr>
+					<tr>
+						<td>加工时间：</td>
+						<td>{{d_list.PROCESSTIME}}</td>
+					</tr>
+					<tr>
+						<td>包装：</td>
+						<td>{{d_list.PACKMATERIAL}}</td>
+					</tr>
+					<tr>
+						<td>添加剂：</td>
+						<td>{{d_list.SUPPLEMENTNAME}}</td>
+					</tr>
+					<tr>
+					<td colspan="2" align="center">每瓶牛奶信息</td>
+					</tr>
+					<tr>
+						<td>牛奶类型：</td>
+						<td>{{e_list.PRODUCTIONTYPE}}</td>
+					</tr>
+					<tr>
+						<td>标准号：</td>
+						<td>{{e_list.HSCODE}}</td>
+					</tr>
+					<tr>
+						<td>保存方式：</td>
+						<td>{{e_list.STORE}}</td>
+					</tr>
+					<tr>
+						<td>生产日期：</td>
+						<td>{{e_list.PRODUCTIONDATE}}</td>
+					</tr>
+					<tr>
+						<td>保质期：</td>
+						<td>{{e_list.EXPIRATIONDATE}}</td>
+					</tr>
+					<tr>
+						<td>制造商：</td>
+						<td>{{e_list.MANUFACTURER}}</td>
+					</tr>
+					<tr>
+						<td>厂址：</td>
+						<td>{{e_list.MANUFACTURERLOC}}</td>
+					</tr>
+					<tr>
+						<td>净含量：</td>
+						<td>{{e_list.NETCONTENT}}</td>
+					</tr>
+					<tr>
+						<td>官网：</td>
+						<td>{{e_list.OFFICIALWEBSITE}}</td>
+					</tr>
+				</table>
+			</div>
+			<div class="caption caption_3" align="center">
+					<table>
+						<tr>
+						<td colspan="2" align="center">仓库信息</td>
+						</tr>
+						<tr>
+							<td>地址：</td>
+							<td>{{f_list.DEPOTLOC}}</td>
+						</tr>
+						<tr>
+							<td>温度：</td>
+							<td>{{f_list.DEPOTTEM}}</td>
+						</tr>
+						<tr>
+							<td>湿度：</td>
+							<td>{{f_list.DEPOTHUM}}</td>
+						</tr>
+						<tr>
+							<td>管理员：</td>
+							<td>{{f_list.MANAGERNAME}}</td>
+						</tr>
+						<tr>
+							<td>电话：</td>
+							<td>{{f_list.MANAGERPHONE}}</td>
+						</tr>
+						<tr>
+						<td colspan="2" align="center">进出库信息</td>
+						</tr>
+						<tr>
+							<td>名称：</td>
+							<td>{{g_list.PRONAME}}</td>
+						</tr>
+						<tr>
+							<td>进出库：</td>
+							<td>{{g_list.PROINOREX}}</td>
+						</tr>
+					</table>   
+			</div>
+			<div class="caption caption_4" align="center">
+				<table>
+					<tr>
+					<td colspan="2" align="center">牛奶信息</td>
+					</tr>
+					<tr>
+						<td>名称：</td>
+						<td>{{h_list.PRONAME}}</td>
+					</tr>
+					<tr>
+						<td>厂家：</td>
+						<td>{{h_list.PROSELLER}}</td>
+					</tr>
+					<tr>
+						<td>买家：</td>
+						<td>{{h_list.PROSHOPNAME}}</td>
+					</tr>
+					<tr>
+					<td colspan="2" align="center">货车信息</td>
+					</tr>
+					<tr>
+						<td>车牌号：</td>
+						<td>{{i_list.CARID}}</td>
+					</tr>
+					<tr>
+						<td>货运公司：</td>
+						<td>{{i_list.COMPANY}}</td>
+					</tr>
+					<tr>
+						<td>车辆注册年份：</td>
+						<td>{{i_list.REGISTERTIME}}</td>
+					</tr>
+					<tr>
+						<td>车厢温度：</td>
+						<td>{{k_list.TEMPERATURE}}</td>
+					</tr>
+					<tr>
+						<td>车厢湿度：</td>
+						<td>{{k_list.HUMIDITY}}</td>
+					</tr>
+					<tr>
+					<td colspan="2" align="center">司机信息</td>
+					</tr>
+					<tr>
+						<td>司机编号：</td>
+						<td>{{j_list.DRIVERID}}</td>
+					</tr>
+					<tr>
+						<td>司机姓名：</td>
+						<td>{{j_list.DRIVERNAME}}</td>
+					</tr>
+					<tr>
+						<td>电话：</td>
+						<td>{{j_list.DRIVERPHONE}}</td>
+					</tr>
+					<tr>
+						<td>驾照有效期：</td>
+						<td>{{j_list.DRILICENSE}}</td>
+					</tr>
+					<tr>
+						<td>性别：</td>
+						<td>{{j_list.SEX}}</td>
+					</tr>
+					<tr>
+						<td>民族：</td>
+						<td>{{j_list.NATION}}</td>
+					</tr>
+				</table> 
+			</div>
+			<div class="caption caption_5" align="center">
+				<table>
+					<tr>
+					<td colspan="2" align="center">销售情况</td>
+					</tr>
+					<tr>
+						<td>超市名：</td>
+						<td>{{l_list.MARKETNAME}}</td>
+					</tr>
+					<tr>
+						<td>超市地址：</td>
+						<td>{{l_list.MARKETLOC}}</td>
+					</tr>
+					<tr>
+						<td>超市电话：</td>
+						<td>{{l_list.MARKETTEL}}</td>
+					</tr>
+					<tr>
+						<td>销售情况：</td>
+						<td>{{l_list.SALEDORNOT}}</td>
+					</tr>
+				</table> 
+			</div>
+		</div>	
+	</div>
+	</body>
+</html>

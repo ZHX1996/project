@@ -1,0 +1,18 @@
+<html>
+<head>
+  <title>Please Sign In</title>
+</head>
+<body>
+  <form action="/signin" method="post">
+    <legend>Please sign in:</legend>
+    <p>账户:<input name="username" placeholder="Username"></p>
+    <p>密码:<input name="password" placeholder="Password" type="password"></p>
+	
+	{% if message %}
+	<p style="color:red">{{ message }}</p>
+	{% endif %}
+	
+    <p><button type="submit">Sign In</button></p>
+  </form>
+</body>
+</html>

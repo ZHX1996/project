@@ -1,0 +1,18 @@
+MODULES_MANAGER_V2
+Authorization.__init__|D:\eclipse workspace\Authorization\Authorization\__init__.py
+Authorization.models|D:\eclipse workspace\Authorization\Authorization\models.py
+Authorization.settings|D:\eclipse workspace\Authorization\Authorization\settings.py
+Authorization.urls|D:\eclipse workspace\Authorization\Authorization\urls.py
+Authorization.views|D:\eclipse workspace\Authorization\Authorization\views.py
+Authorization.wsgi|D:\eclipse workspace\Authorization\Authorization\wsgi.py
+manage|D:\eclipse workspace\Authorization\manage.py
+user.__init__|D:\eclipse workspace\Authorization\user\__init__.py
+user.admin|D:\eclipse workspace\Authorization\user\admin.py
+user.migrations.0001_initial|D:\eclipse workspace\Authorization\user\migrations\0001_initial.py
+user.migrations.0002_auto_20170502_2017|D:\eclipse workspace\Authorization\user\migrations\0002_auto_20170502_2017.py
+user.migrations.0003_auto_20170502_2020|D:\eclipse workspace\Authorization\user\migrations\0003_auto_20170502_2020.py
+user.migrations.__init__|D:\eclipse workspace\Authorization\user\migrations\__init__.py
+user.models|D:\eclipse workspace\Authorization\user\models.py
+user.tests|D:\eclipse workspace\Authorization\user\tests.py
+user.urls|D:\eclipse workspace\Authorization\user\urls.py
+user.views|D:\eclipse workspace\Authorization\user\views.py

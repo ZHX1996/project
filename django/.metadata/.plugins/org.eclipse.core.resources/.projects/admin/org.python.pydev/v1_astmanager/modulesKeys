@@ -1,0 +1,14 @@
+MODULES_MANAGER_V2
+admin.__init__|D:\eclipse workspace\admin\admin\__init__.py
+admin.settings|D:\eclipse workspace\admin\admin\settings.py
+admin.urls|D:\eclipse workspace\admin\admin\urls.py
+admin.wsgi|D:\eclipse workspace\admin\admin\wsgi.py
+blob.__init__|D:\eclipse workspace\admin\blob\__init__.py
+blob.admin|D:\eclipse workspace\admin\blob\admin.py
+blob.apps|D:\eclipse workspace\admin\blob\apps.py
+blob.migrations.0001_initial|D:\eclipse workspace\admin\blob\migrations\0001_initial.py
+blob.migrations.__init__|D:\eclipse workspace\admin\blob\migrations\__init__.py
+blob.models|D:\eclipse workspace\admin\blob\models.py
+blob.tests|D:\eclipse workspace\admin\blob\tests.py
+blob.views|D:\eclipse workspace\admin\blob\views.py
+manage|D:\eclipse workspace\admin\manage.py

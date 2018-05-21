@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+       <title>页面</title>
+       <meta name="viewport"?content="width=device-width,?initial-scale=1.0,?minimum-scale=1.0,?maximum-scale=1.0,?user-scalable=no">
+       <meta name="keywords" content="" />
+       <meta name="description" content="" />
+       <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+       <link href="http://apps.bdimg.com/libs/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+       <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+       <script src="http://apps.bdimg.com/libs/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+       <link rel="stylesheet" type="text/css" href="http://sandbox.runjs.cn/uploads/rs/55/sjckzedf/lanrenzhijia.css">
+       <script type="text/javascript" src="http://sandbox.runjs.cn/uploads/rs/55/sjckzedf/jquery-1.8.0.min.js"></script>
+       <link href="/static/main.css" rel="stylesheet" type="text/css" />
+       <script type="text/javascript" src="/static/main.js"></script>
+        <script type="text/javascript" src="/static/reconnect_webSocket.js"></script>
+	</head>
+	<body>
+		<div id="main" text="#68228B" onload="setInterval('clock()',1000)">
+			<div id='njupt'><img src="/static/njupt.png" width="70px" title="南京邮电大学" onclick="window.open('https://www.baidu.com/')"/><font size=25 style="margin-left:10px; color:white;">食品安全监管平台</font></div>
+			<div id='temperature'><img src="/static/temperature.jpg" title="温度传感器 点击查看详情" onclick="window.open('https://www.baidu.com/')"/></div>
+			<div id='humidity'><img src="/static/humidity.jpg" title="湿度传感器 点击查看详情" onclick="window.open('https://www.baidu.com/')"/></div>
+
+            <div class="nav1">
+				<ul>
+                    <li><a href="" id="a1"></span><img src="/static/camera.png"/>牧场环境监测平台</a></li>
+{#				  <li><a href="/source"><img src="/static/map.jpg"/>追溯平台</a></li>#}
+                    <li><a href="http://192.168.3.9:8080/web-rfid/login"><img src="/static/map.jpg"/>追溯平台</a></li>
+				    <li><a href="http://47.94.225.159:8080/manager.html"><img src="/static/map.jpg"/>物流追踪</a></li>
+				    <li><a href=""><img src="/static/map.jpg"/>知识图库</a></li>
+				    <li><a href=""><img src="/static/map.jpg"/>室内定位</a></li>
+					<li><a href=""><img src="/static/sec.png"/>手机查询</a></li>
+				</ul>
+			</div>
+		</div>
+		<div id="data"> 
+			<div id="first_title"><p>实时数据中心</p></div>
+			<div id="second_title"><p>监控中心&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><div id="showtime"></div></div>
+			<div id="info1">
+                <div class="sitenav">
+                    <nav role="navigation" class="navbar navbar-default">
+                        <ul class="nav nav-pills">
+                           <li class="lip lip_1 dropdown active"><a class="dropdown-toggle" data-toggle="dropdown">牧场
+                               <b class="caret"></b></a>
+                               <ul class="dropdown-menu">
+                                   <li id="test"><a  class='theme-login' href="javascript:;">历史纪录</a></li>
+                               </ul>
+                           </li>
+                            <li class="lip lip_2 dropdown active"><a class="dropdown-toggle" data-toggle="dropdown">奶厂
+                               <b class="caret"></b></a>
+                               <ul class="dropdown-menu">
+                                   <li id="test"><a  class='theme-login' href="javascript:;">历史纪录</a></li>
+                               </ul>
+                           </li>
+                            <li class="lip lip_3 dropdown active"><a class="dropdown-toggle" data-toggle="dropdown">仓储
+                               <b class="caret"></b></a>
+                               <ul class="dropdown-menu">
+                                   <li id="test"><a  class='theme-login' href="javascript:;">历史纪录</a></li>
+                               </ul>
+                           </li>
+                            <li class="lip lip_4 dropdown active"><a class="dropdown-toggle" data-toggle="dropdown">物流
+                               <b class="caret"></b></a>
+                               <ul class="dropdown-menu">
+                                   <li id="test"><a  class='theme-login' href="javascript:;">历史纪录</a></li>
+                               </ul>
+                           </li>
+                            <li class="lip lip_5 dropdown active"><a class="dropdown-toggle" data-toggle="dropdown">销售
+                               <b class="caret"></b></a>
+                               <ul class="dropdown-menu">
+                                   <li id="test"><a  class='theme-login' href="javascript:;">历史纪录</a></li>
+                               </ul>
+                           </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="tabinfo">
+                    <div class="divtab" id="lip1">
+                        <table id="tab1">
+                            <thead>
+                                <tr>
+                                    <th>时间</th>
+                                    <th>温度</th>
+                                    <th>湿度</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="divtab" id="lip2">
+                        <table id="tab2">
+                            <thead>
+                                <tr>
+                                    <th>时间</th>
+                                    <th>温度</th>
+                                    <th>湿度</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="divtab" id="lip3">
+                        <table id="tab3">
+                            <thead>
+                                <tr>
+                                    <th>时间</th>
+                                    <th>温度</th>
+                                    <th>湿度</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="divtab" id="lip4">
+                        <table id="tab4">
+                            <thead>
+                                <tr>
+                                    <th>时间</th>
+                                    <th>温度</th>
+                                    <th>湿度</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="divtab" id="lip5">
+                        <table id="tab5">
+                            <thead>
+                                <tr>
+                                    <th>时间</th>
+                                    <th>温度</th>
+                                    <th>湿度</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="theme-popover" style="padding:0;">
+                    <div class="theme-poptit">
+                        <a href="javascript:;" title="关闭" class="close">×</a>
+                        选择时间： <input type="date" name="date" value="" id="date1"/>&nbsp;<button id="date">确定</button>
+                    </div>
+                    <div class="theme-popbod dform" style="height:80%;margin:0;padding:0;overflow: auto;">
+                        <form class="theme-signin" name="loginform" action="" method="post" style="text-align:center;margin:0;padding:0 10% 0 10%;">
+                            <table id="dict_result" border="1 solid black" width="100%">
+                                <thead>
+                                <th>时间</th>
+                                <th>温度</th>
+                                <th>湿度</th>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+                <div class="theme-popover-mask"></div>
+            </div>
+        </div>
+	</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <title>页面</title>
+	  <meta name="keywords" content="" />
+	  <meta name="description" content="" />
+	  <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+	  <link href="http://apps.bdimg.com/libs/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	  <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+	  <script src="http://apps.bdimg.com/libs/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	  <script type="text/javascript">
+	  $(document).ready(function(){
+		$(".lip").click(function(){
+			$('.lip').removeClass('active');
+			$(this).addClass("active");
+			});
+		$('.lip_2').addClass("active");
+		$('#content').attr("src", "/grass");
+		$("button").click(function(){
+            $('#content').attr("src", "/grass");
+            $('.lip_2').addClass("active");
+            });
+		});
+	  </script>
+	</head>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+            min-width: 1000px;
+		}
+		.head {
+			position: fixed;
+			top: 2%;
+			left: 2%;
+			right: 2%;
+			background: #FFF;
+            height:5%;
+		}
+        #li_search{
+			margin-left:20%;
+		}
+		li{
+			margin-left:4%;
+		}
+		.lip{
+            width:60px;
+            margin-top: 0.3%;
+		}
+        .nav{
+            width:100%;
+            height:5%;
+            vertical-align: middle;
+            min-width:1200px;
+        }
+
+		.main {
+			margin-top: 6%;
+			height: 100%;
+			background: #CCC;
+		}
+		.footer {
+			background-color: #333; 
+		}
+		.clear:after{
+			clear:both;
+		}
+		.clear{
+			zoom:1;
+		}
+	</style>
+
+	<body>
+		<header class="head">
+			<div text-align="center">
+				<nav role="navigation" class="navbar navbar-default">
+					<ul class="nav nav-pills">
+					   <li class="lip lip_1"><a href="http://127.0.0.1:8000/">Home</a></li>
+					   <li class="lip lip_2"><a href="/grass" target="tar">牧场</a></li>
+					   <li class="lip lip_3"><a href="/factory" target="tar">奶厂</a></li>
+					   <li class="lip lip_4"><a href="/storage" target="tar">仓储</a></li>
+					   <li class="lip lip_5"><a href="/logistic" target="tar">物流</a></li>
+					   <li class="lip lip_6"><a href="/sale" target="tar">销售</a></li>
+					   <li id="li_search">
+							<div id="navbarCollapse" class="collapse navbar-collapse">
+								<form role="search" class="navbar-form navbar-left">
+									<div class="form-group">
+                                        {% csrf_token %}
+										<input type="text" name="q" autocomplete="off" size=40 placeholder="Search" class="form-control">
+									</div>
+									<button type="submit" class="btn btn-default">搜索</button>
+								</form>
+							</div>
+					   </li>
+					   <li class="lip" id="li_login"><a href="">登录</a></li>
+				   </ul>
+				</nav>			   
+            </div>
+		</header>
+		
+		<div class="main" name="main">
+            <div id="content1"><iframe id="content" src="" name="tar" width="100%" height="1000px" /></div>
+			<div class = "clear"></div>
+		</div>
+{#		<div class="footer">footer</div>#}
+	</body>
+</html>

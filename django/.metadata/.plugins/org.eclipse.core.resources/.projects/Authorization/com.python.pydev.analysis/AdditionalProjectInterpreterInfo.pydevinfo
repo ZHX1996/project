@@ -1,0 +1,76 @@
+-- VERSION_4
+-- START DISKCACHE
+D:\eclipse workspace\.metadata\.plugins\org.eclipse.core.resources\.projects\Authorization\com.python.pydev.analysis\v2_indexcache
+user.migrations.0002_auto_20170502_2017|1493727423194|D:\eclipse workspace\Authorization\user\migrations\0002_auto_20170502_2017.py
+user.tests|1493707830609|D:\eclipse workspace\Authorization\user\tests.py
+user.__init__|1493707830616|D:\eclipse workspace\Authorization\user\__init__.py
+Authorization.urls|1493709151778|D:\eclipse workspace\Authorization\Authorization\urls.py
+Authorization.settings|1493725374547|D:\eclipse workspace\Authorization\Authorization\settings.py
+Authorization.models|1493715796517|D:\eclipse workspace\Authorization\Authorization\models.py
+Authorization.__init__|1493607603903|D:\eclipse workspace\Authorization\Authorization\__init__.py
+user.urls|1493709168814|D:\eclipse workspace\Authorization\user\urls.py
+manage|1493607603824|D:\eclipse workspace\Authorization\manage.py
+user.views|1493725447680|D:\eclipse workspace\Authorization\user\views.py
+Authorization.wsgi|1493607603903|D:\eclipse workspace\Authorization\Authorization\wsgi.py
+user.migrations.__init__|1493707830628|D:\eclipse workspace\Authorization\user\migrations\__init__.py
+user.migrations.0003_auto_20170502_2020|1493727629791|D:\eclipse workspace\Authorization\user\migrations\0003_auto_20170502_2020.py
+user.migrations.0001_initial|1493726016573|D:\eclipse workspace\Authorization\user\migrations\0001_initial.py
+user.admin|1493727516387|D:\eclipse workspace\Authorization\user\admin.py
+user.models|1494210367238|D:\eclipse workspace\Authorization\user\models.py
+-- END DISKCACHE
+-- START DICTIONARY
+18
+5=user.migrations.0002_auto_20170502_2017
+16=UserProfile
+8=Authorization.urls
+13=Migration
+17=UserProfile.Meta
+1=Authorization.settings
+11=Authorization.models
+15=Users
+18=Users.Meta
+9=user.urls
+12=ProfileInline
+10=user.views
+2=Authorization.wsgi
+6=user.migrations.0003_auto_20170502_2020
+14=UserProfileAdmin
+4=user.migrations.0001_initial
+7=user.admin
+3=user.models
+-- END DICTIONARY
+-- START TREE 1
+20
+all|1|ALLOWED_HOSTS!11@
+app|1|application!19@
+aut|1|AUTH_PROFILE_MODULE!11@
+bas|1|BASE_DIR!11@
+cre|1|create_user_profile!26@
+dat|1|DATABASES!11@
+deb|1|DEBUG!11@
+ins|1|INSTALLED_APPS!11@
+lan|1|LANGUAGE_CODE!11@
+mid|1|MIDDLEWARE_CLASSES!11@
+mig|3|Migration!33@Migration!41@Migration!49@
+pro|1|ProfileInline!57@
+roo|1|ROOT_URLCONF!11@
+sec|1|SECRET_KEY!11@
+sta|1|STATIC_URL!11@
+tem|1|TEMPLATES!11@
+tim|1|TIME_ZONE!11@
+url|2|urlpatterns!67@urlpatterns!75@
+use|7|userdemo!82@UserProfileAdmin!57@USE_L10N!11@UserProfile!25@Users!89@USE_I18N!11@USE_TZ!11@
+wsg|1|WSGI_APPLICATION!11@
+-- END TREE
+-- START TREE 2
+9
+can|1|can_delete!12&59@
+dep|3|dependencies!13&43@dependencies!13&51@dependencies!13&35@
+inl|1|inlines!14&59@
+max|1|max_num!12&59@
+met|2|Meta!15&89@Meta!16&25@
+mod|1|model!12&59@
+ope|3|operations!13&51@operations!13&35@operations!13&43@
+per|2|permissions!17&27@permissions!18&91@
+use|1|user!16&27@
+-- END TREE

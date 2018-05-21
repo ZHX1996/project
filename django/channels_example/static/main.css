@@ -1,0 +1,141 @@
+html, body, #main, #data{
+    height:100%;
+    width:100%;
+    margin:0;
+    padding:0;
+    min-width:500px;
+    min-height:600px;
+}
+#main{
+    margin:0;
+    padding:0;
+    background-image:url(/static/1.jpeg);
+    background-repeat:no-repeat;
+    background-size:100% 100%;
+    background-attachment:relative;
+}
+#njupt{
+    padding-top:0.8%;
+    padding-left:0.8%;
+}
+#njupt img{vertical-align:bottom;}
+#temperature{
+    width:4%;
+    height:4%;
+    position:relative;
+    top:32%;
+    left:65%;
+}
+#temperature img{width:100%;height:100%;}
+#humidity{
+    width:4%;
+    height:4%;
+    position:relative;
+    top:29%;
+    left:75%;
+}
+#humidity img{width:100%;height:100%;}
+.nav1{
+    top:43%;
+    left:19%;
+    position:relative;
+    width:63%;
+    height:17%;
+}
+.nav1 ul{
+    width:100%;
+    height:100%;
+    padding:0;
+    position:relative;
+}
+.nav1 ul li{
+    float:left;
+    list-style-type:none;
+    border:0 solid;
+    width:16%;
+    height:99%;
+}
+.nav1 ul li a{
+    width:99%;
+    height:99%;
+    line-height:70%;
+    background:white;
+    margin:0 0;
+    position:relative;
+    //top:20%
+    font-size:100%;
+    display:block;
+    text-align:center;
+    text-decoration:none;
+    border-radius:4% 4% 4% 4%;
+}
+.nav1 ul li a img{
+    width:45%;
+    height:62%;
+    display:block;
+    margin-left:27%;
+    padding-top:10%;
+    padding-bottom:8%;
+}
+.nav1 ul li a:hover{
+    width:100%;
+    height:100%;
+    line-height:70%;
+    color:blue;
+}
+#first_title{
+    width:100%;
+    height:7%;
+    background:gray;
+    padding-top:0;
+}
+#first_title p{
+    font-size:200%;
+    color:white;
+    padding-left:8%;
+}
+#second_title p, #showtime{
+    display:inline;
+}
+#second_title{
+    height:5%;
+    background: #696969;
+    font-size:150%;
+    padding-left:3%;
+    color:white;
+}
+
+.tabinfo{
+    position:relative;
+    width:80%;
+    margin-left: 15%;
+    background: black;
+}
+.tabinfo .divtab{
+    width:85%;
+    border-right:2px solid gray;
+    border-bottom:2px solid gray;
+    position:absolute;
+}
+/*.tabinfo .divtab table{*/
+    /*table-layout: fixed;*/
+/*}*/
+.tabinfo .divtab table thead tr th{
+    border-left:2px solid gray;
+    border-top:2px solid gray;
+    text-align:center;
+    width:1%;
+    font-size: 17px;
+}
+.tabinfo .divtab td,th{
+    border-left:2px solid gray;
+    border-top:2px solid gray;
+    text-align:center;
+    width:15%;
+    font-size: 15px;
+}
+.sitenav{
+    font-size: 130%;
+}
+
+

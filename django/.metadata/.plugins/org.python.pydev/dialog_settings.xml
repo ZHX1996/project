@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="workingset_selection_history">
+		<item value="WS01"/>
+	</list>
+	<section name="PydevSearchPage">
+		<item value="false" key="com.python.pydev.ui.search.pySearchPageCASE_SENSITIVE"/>
+		<item value="false" key="com.python.pydev.ui.search.pySearchPageSEARCH_DERIVED"/>
+		<item value="false" key="REG_EX_SEARCH"/>
+		<item value="0" key="com.python.pydev.ui.search.pySearchPageHISTORY_SIZE"/>
+	</section>
+	<section name="pydev_completion_proposal_size">
+		<item value="276" key="size.y"/>
+		<item value="392" key="size.x"/>
+	</section>
+</section>

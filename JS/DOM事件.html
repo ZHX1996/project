@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf8" />
+		<script>
+			function checkCookies()
+			{
+				if(navigator.cookieEnabled == true)
+				{
+					alert("cookies可用");
+				}
+				else
+				{
+					alert("cookies不可用");
+				}
+			}
+			function mOver(obj)
+			{
+				obj.innerHTML = "Thank You";
+			}	
+			function mOut(obj)
+			{
+				obj.innerHTML = "Mouse Over Me";
+			}
+			function focuson(x)
+			{
+				x.style.background = "yellow";
+			}
+		</script>
+	</head>
+	<body onload  = "checkCookies()">
+		<div onmouseover = "mOver(this)" onmouseout = "mOut(this)" style = "background-color:blue; width:120px; height:20px; padding:40px;">Mouse Over Me</div>
+		<h1 onmouseover = "style.color = 'red'" onmouseout = "style.color = 'black'">将鼠标移动至文本上</h1>
+		<input type = "text" onfocus = "focuson(this)">
+	</body>
+</html>

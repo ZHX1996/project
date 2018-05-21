@@ -1,0 +1,43 @@
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.template import RequestContext, Template
+from django.utils.encoding import smart_str, smart_unicode
+
+from wechatpy.utils import check_signature  
+from wechatpy.exceptions import InvalidSignatureException
+from wechatpy import parse_message, create_reply
+from wechatpy.replies import BaseReply
+
+import reply_text
+import reply_event
+# Create your views here.
+TOKEN = 'ZHX1996'
+@csrf_exempt
+def verify(request):
+    if request.method == 'GET':
+        signature = request.GET.get('signature', None)
+        timestamp = request.GET.get('timestamp', None)
+        nonce = request.GET.get('nonce', None)
+        echostr = request.GET.get('echostr', None)
+        try:  
+            check_signature(TOKEN, signature, timestamp, nonce)  
+        except InvalidSignatureException:  
+            echostr = 'error'        
+        response = HttpResponse(echostr, content_type="text/plain")
+        return response
+    else:
+        reply = None
+        msg = parse_message(request.body)
+        if msg.type == 'text':
+            reply = reply_text.doreply(msg)
+        elif msg.type == 'event':
+            reply = reply_event.doreply(msg)
+        else:
+            pass
+        
+        if not reply or not isinstance(reply, BaseReply):
+            reply = create_reply('暂不支持文本消息外的其他操作...\r\n回复:xx天气 查询城市天气情况', msg)
+        
+        response = HttpResponse(reply.render(), content_type="application/xml")
+        return response
+            

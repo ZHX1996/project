@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+ <head>
+  <title></title>
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta http-equiv="content-type" content="text/html;charset=gb2312"/>
+  <style type = "text/css">
+  	body,div{
+  		margin:0;
+  		padding:0;
+  	}
+  	body{
+  		/*padding:5px 220px; 下面两段代码可以保证页面居中*/
+  		margin:5px auto;
+  		width:810px;
+  		background:blue;
+	}
+  	#top{
+  	width:810px;
+  	height:30px;
+  	background:PaleTurquoise;
+  	margin-bottom:10px;
+  	}
+   #left{
+   	width:200px;
+   	height:600px;
+   	background:green;
+   	float:left;
+  }
+  #right{
+  	width:600px;
+  	height:600px;
+  	background:pink;
+  	float:left;
+  	margin-left:10px;
+  }
+  #bottom{
+  	width:810px;
+  	height:50px;
+  	background:yellow;
+  	clear:both;
+  	margin-top:10px;
+  }
+  /*加main这个父块的作用是使“下”的margin-top可以使用
+  并且“左”和“右”的布局不会随网页大小的变化而变化*/
+  #main{
+  	width:810px;
+  	height:600px;
+  /*	overflow:hidden; */
+  }   /*防止子元素的浮动影响父元素可以给父元素加overflow，
+  但当子元素设置position:absolute时就不起作用了。这时要
+  给父元素添加一个空块，给空块加一个清除浮动的类.  
+  但是最常用的是伪类清除*/
+  .clear{
+  	clear:both;
+  }
+  </style>
+ </head>
+ <body>
+ 	<div id = "top">上</div>
+ 	<div id = "main">
+	 	<div id = "left">左</div>
+	 	<div id = "right">右</div>
+	 	<div class = "clear"></div>
+	</div>
+ 	<div id = "bottom">下</div>
+ </body>
+</html>

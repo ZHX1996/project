@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+		<link rel="stylesheet" href="http://apps.bdimg.com/libs/jquerymobile/1.4.2/jquery.mobile.min.css">
+		<script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script src="http://apps.bdimg.com/libs/jquerymobile/1.4.2/jquery.mobile.min.js"></script>
+</head>
+<script>
+ 
+$(document).ready(function(){
+ 
+$('.type').find('li').bind('click', function(){
+ 
+$('.caption').removeClass('show');
+ 
+ var index = $(this).attr('class').split('_')[1];
+ var cation_name = '.caption_' +  index;
+ var cap = $(cation_name).addClass("show");
+ console.log( cap.attr('class'));
+});
+$('.caption_1').addClass('show');
+});
+</script>
+ 
+<style>
+*{
+margin:0;
+padding:0;
+}
+ 
+.caption {
+ display: none;
+}
+ 
+body .show {
+display: block;
+}
+.visual {
+    width: 782px;
+    background:#fff;    
+    margin: 0 auto;
+    margin-top:40px;
+}
+.visual .type {
+    background: none repeat scroll 0 0 #F6F6F6;
+    box-shadow: -2px -2px 2px #C0C0C0 inset;
+    float: left;
+    width:30%;
+     
+}
+.visual .type ul li{
+    list-style: none;
+    cursor:pointer;
+    text-align: center;
+    padding: 15px 0;
+    color: #0f88b5;
+}
+.visual .type ul li:hover{
+    background:#44a4da;
+    color: #fff;
+     
+}
+ 
+ 
+</style>
+ 
+</head>
+<body style="background:#9ac9cb;">
+<div class="visual">
+    <div class="type">
+        <ul>
+            <li class="tab_1"><a >细菌基因组Scanning</a></li>
+            <li class="tab_2"><a >Small RNA深度测序</a></li>
+            <li  class="tab_3"><a >环境微生物群落多样性</a></li>
+            <li  class="tab_4"><a >动植物基因组 de nove测序</a></li>
+            <li  class="tab_5"><a >外显子组和目标区域深度测序</a></li>
+            <li  class="tab_6"><a >DNA常规测序</a></li>
+            <li  class="tab_7"><a >转录组测序</a></li>
+            <li  class="tab_8"><a >基因表达谱分析</a></li>
+        </ul>
+    </div>
+ 
+    <div class="caption caption_1">
+            <div style="background:red;height: 375px;"><h1>第一张</h1></div>
+    </div>
+    <div class="caption caption_2">
+            <div style="background:blue;height: 375px;"><h1>第2张</h1></div>  
+    </div>
+    <div class="caption caption_3" >
+            <div style="background:yellow;height: 375px;"><h1>第3张</h1></div>        
+    </div>
+    <div class="caption caption_4">
+            <div style="background:pink;height: 375px;"><h1>第4张</h1></div>  
+    </div>
+    <div class="caption caption_5">
+            <div style="background:gray;height: 375px;"><h1>第5张</h1></div>
+    </div>
+    <div class="caption caption_6">
+            <div style="background:green;height: 375px;"><h1>第6张</h1></div>     
+    </div>
+    <div class="caption caption_7">
+            <div style="background:pink;height: 375px;"><h1>第7张</h1></div>  
+    </div>
+    <div class="caption caption_8">
+            <div style="background:red;height: 375px;"><h1>第8张</h1></div>   
+    </div>
+</div>
+ 
+</body>
+ 
+</html>

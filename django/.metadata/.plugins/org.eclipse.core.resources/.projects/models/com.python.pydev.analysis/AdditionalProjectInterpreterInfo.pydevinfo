@@ -1,0 +1,61 @@
+-- VERSION_4
+-- START DISKCACHE
+D:\eclipse workspace\.metadata\.plugins\org.eclipse.core.resources\.projects\models\com.python.pydev.analysis\v2_indexcache
+people.tests|1484015321996|D:\eclipse workspace\models\people\tests.py
+models.settings|1484016118313|D:\eclipse workspace\models\models\settings.py
+people.admin|1484015321990|D:\eclipse workspace\models\people\admin.py
+models.wsgi|1484015302783|D:\eclipse workspace\models\models\wsgi.py
+manage|1484015302626|D:\eclipse workspace\models\manage.py
+models.urls|1484015302776|D:\eclipse workspace\models\models\urls.py
+people.migrations.__init__|1484015322005|D:\eclipse workspace\models\people\migrations\__init__.py
+people.views|1484015321999|D:\eclipse workspace\models\people\views.py
+models.__init__|1484015302787|D:\eclipse workspace\models\models\__init__.py
+people.apps|1484015321992|D:\eclipse workspace\models\people\apps.py
+people.models|1484105487041|D:\eclipse workspace\models\people\models.py
+people.__init__|1484015322001|D:\eclipse workspace\models\people\__init__.py
+people.migrations.0001_initial|1484016429401|D:\eclipse workspace\models\people\migrations\0001_initial.py
+-- END DISKCACHE
+-- START DICTIONARY
+9
+1=models.settings
+8=Migration
+4=people.apps
+2=models.wsgi
+5=people.models
+3=people.migrations.0001_initial
+7=Person
+9=PeopleConfig
+6=models.urls
+-- END DICTIONARY
+-- START TREE 1
+20
+all|1|ALLOWED_HOSTS!11@
+app|1|application!19@
+aut|1|AUTH_PASSWORD_VALIDATORS!11@
+bas|1|BASE_DIR!11@
+dat|1|DATABASES!11@
+deb|1|DEBUG!11@
+ins|1|INSTALLED_APPS!11@
+lan|1|LANGUAGE_CODE!11@
+mid|1|MIDDLEWARE_CLASSES!11@
+mig|1|Migration!25@
+peo|1|PeopleConfig!33@
+per|1|Person!41@
+roo|1|ROOT_URLCONF!11@
+sec|1|SECRET_KEY!11@
+sta|1|STATIC_URL!11@
+tem|1|TEMPLATES!11@
+tim|1|TIME_ZONE!11@
+url|1|urlpatterns!51@
+use|3|USE_L10N!11@USE_I18N!11@USE_TZ!11@
+wsg|1|WSGI_APPLICATION!11@
+-- END TREE
+-- START TREE 2
+6
+__s|1|__str__!7&42@
+age|1|age!7&43@
+dep|1|dependencies!8&27@
+ini|1|initial!8&27@
+nam|2|name!9&35@name!7&43@
+ope|1|operations!8&27@
+-- END TREE

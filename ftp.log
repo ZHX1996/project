@@ -1,0 +1,58 @@
+INFO:pyftpdlib:>>> starting FTP server on 0.0.0.0:21, pid=10428 <<<
+INFO:pyftpdlib:concurrency model: async
+INFO:pyftpdlib:masquerade (NAT) address: 127.0.0.1
+INFO:pyftpdlib:passive ports: 2000->2332
+INFO:pyftpdlib:127.0.0.1:51200-[] FTP session opened (connect)
+INFO:pyftpdlib:127.0.0.1:51200-[] USER 'anonymous' failed login.
+INFO:pyftpdlib:127.0.0.1:51200-[] FTP session closed (disconnect).
+INFO:pyftpdlib:127.0.0.1:51201-[] FTP session opened (connect)
+INFO:pyftpdlib:127.0.0.1:51201-[] USER 'anonymous' failed login.
+INFO:pyftpdlib:127.0.0.1:51201-[] FTP session closed (disconnect).
+INFO:pyftpdlib:127.0.0.1:51204-[] FTP session opened (connect)
+INFO:pyftpdlib:127.0.0.1:51204-[user] USER 'user' logged in.
+INFO:pyftpdlib:127.0.0.1:51205-[] FTP session opened (connect)
+INFO:pyftpdlib:127.0.0.1:51205-[user] USER 'user' logged in.
+INFO:pyftpdlib:127.0.0.1:51204-[user] FTP session closed (disconnect).
+INFO:pyftpdlib:127.0.0.1:51205-[user] FTP session closed (disconnect).
+INFO:pyftpdlib:127.0.0.1:51210-[] FTP session opened (connect)
+INFO:pyftpdlib:127.0.0.1:51210-[] USER 'anonymous' failed login.
+INFO:pyftpdlib:127.0.0.1:51210-[] FTP session closed (disconnect).
+INFO:pyftpdlib:127.0.0.1:51211-[] FTP session opened (connect)
+INFO:pyftpdlib:127.0.0.1:51211-[user] USER 'user' logged in.
+INFO:pyftpdlib:127.0.0.1:51212-[] FTP session opened (connect)
+INFO:pyftpdlib:127.0.0.1:51212-[user] USER 'user' logged in.
+INFO:pyftpdlib:127.0.0.1:51211-[user] FTP session closed (disconnect).
+INFO:pyftpdlib:127.0.0.1:51212-[user] CWD D:\MyDrivers 250
+INFO:pyftpdlib:127.0.0.1:51212-[user] CWD D:\MyDrivers 250
+INFO:pyftpdlib:127.0.0.1:51212-[user] CWD D:\MyDrivers 250
+INFO:pyftpdlib:127.0.0.1:51212-[user] STOR D:\MyDrivers\2.vsdx completed=1 bytes=36531 seconds=0.078
+INFO:pyftpdlib:127.0.0.1:51212-[user] CWD D:\MyDrivers 250
+INFO:pyftpdlib:127.0.0.1:51212-[user] DELE D:\MyDrivers\2.vsdx 250
+INFO:pyftpdlib:127.0.0.1:51212-[user] FTP session closed (disconnect).
+INFO:pyftpdlib:127.0.0.1:51223-[] FTP session opened (connect)
+INFO:pyftpdlib:127.0.0.1:51223-[] USER 'anonymous' failed login.
+INFO:pyftpdlib:127.0.0.1:51223-[] FTP session closed (disconnect).
+INFO:pyftpdlib:127.0.0.1:51229-[] FTP session opened (connect)
+INFO:pyftpdlib:127.0.0.1:51229-[] USER 'anonymous' failed login.
+INFO:pyftpdlib:127.0.0.1:51229-[] FTP session closed (disconnect).
+INFO:pyftpdlib:127.0.0.1:51233-[] FTP session opened (connect)
+INFO:pyftpdlib:127.0.0.1:51233-[user] USER 'user' logged in.
+INFO:pyftpdlib:127.0.0.1:51234-[] FTP session opened (connect)
+INFO:pyftpdlib:127.0.0.1:51234-[user] USER 'user' logged in.
+INFO:pyftpdlib:127.0.0.1:51233-[user] FTP session closed (disconnect).
+INFO:pyftpdlib:127.0.0.1:51234-[user] CWD D:\MyDrivers 250
+INFO:pyftpdlib:127.0.0.1:51234-[user] CWD D:\MyDrivers 250
+INFO:pyftpdlib:127.0.0.1:51234-[user] CWD D:\MyDrivers 250
+INFO:pyftpdlib:127.0.0.1:51234-[user] CWD D:\MyDrivers 250
+INFO:pyftpdlib:127.0.0.1:51234-[user] CWD D:\MyDrivers 250
+INFO:pyftpdlib:127.0.0.1:51234-[user] CWD D:\MyDrivers 250
+INFO:pyftpdlib:127.0.0.1:51234-[user] CWD D:\MyDrivers 250
+INFO:pyftpdlib:127.0.0.1:51234-[user] STOR D:\MyDrivers\1.txt completed=1 bytes=0 seconds=0.0
+INFO:pyftpdlib:127.0.0.1:51234-[user] CWD D:\MyDrivers 250
+INFO:pyftpdlib:127.0.0.1:51234-[user] DELE D:\MyDrivers\1.txt 250
+INFO:pyftpdlib:127.0.0.1:51234-[user] CWD D:\MyDrivers\backup 250
+INFO:pyftpdlib:127.0.0.1:51234-[user] CWD D:\MyDrivers 250
+INFO:pyftpdlib:127.0.0.1:51234-[user] CWD D:\MyDrivers 250
+INFO:pyftpdlib:127.0.0.1:51234-[user] CWD D:\MyDrivers 250
+INFO:pyftpdlib:127.0.0.1:51234-[user] STOR D:\MyDrivers\1.txt completed=1 bytes=0 seconds=0.0
+INFO:pyftpdlib:127.0.0.1:51234-[user] FTP session closed (disconnect).

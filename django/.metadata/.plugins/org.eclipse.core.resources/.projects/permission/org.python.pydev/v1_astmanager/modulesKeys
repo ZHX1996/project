@@ -1,0 +1,15 @@
+MODULES_MANAGER_V2
+app.__init__|D:\eclipse workspace\permission\app\__init__.py
+app.admin|D:\eclipse workspace\permission\app\admin.py
+app.migrations.0001_initial|D:\eclipse workspace\permission\app\migrations\0001_initial.py
+app.migrations.0002_auto_20170502_1405|D:\eclipse workspace\permission\app\migrations\0002_auto_20170502_1405.py
+app.migrations.__init__|D:\eclipse workspace\permission\app\migrations\__init__.py
+app.models|D:\eclipse workspace\permission\app\models.py
+app.tests|D:\eclipse workspace\permission\app\tests.py
+app.views|D:\eclipse workspace\permission\app\views.py
+manage|D:\eclipse workspace\permission\manage.py
+permission.__init__|D:\eclipse workspace\permission\permission\__init__.py
+permission.settings|D:\eclipse workspace\permission\permission\settings.py
+permission.urls|D:\eclipse workspace\permission\permission\urls.py
+permission.views|D:\eclipse workspace\permission\permission\views.py
+permission.wsgi|D:\eclipse workspace\permission\permission\wsgi.py

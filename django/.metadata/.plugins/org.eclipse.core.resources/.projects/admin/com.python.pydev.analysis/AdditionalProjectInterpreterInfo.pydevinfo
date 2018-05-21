@@ -1,0 +1,74 @@
+-- VERSION_4
+-- START DISKCACHE
+D:\eclipse workspace\.metadata\.plugins\org.eclipse.core.resources\.projects\admin\com.python.pydev.analysis\v2_indexcache
+admin.__init__|1484104678801|D:\eclipse workspace\admin\admin\__init__.py
+blob.tests|1484104691804|D:\eclipse workspace\admin\blob\tests.py
+admin.settings|1484116818616|D:\eclipse workspace\admin\admin\settings.py
+blob.models|1484119273348|D:\eclipse workspace\admin\blob\models.py
+blob.migrations.0001_initial|1484105645140|D:\eclipse workspace\admin\blob\migrations\0001_initial.py
+blob.views|1484104691806|D:\eclipse workspace\admin\blob\views.py
+admin.wsgi|1484104678800|D:\eclipse workspace\admin\admin\wsgi.py
+manage|1484104678768|D:\eclipse workspace\admin\manage.py
+admin.urls|1484104678797|D:\eclipse workspace\admin\admin\urls.py
+blob.apps|1484104691800|D:\eclipse workspace\admin\blob\apps.py
+blob.__init__|1484104691807|D:\eclipse workspace\admin\blob\__init__.py
+blob.admin|1484120485671|D:\eclipse workspace\admin\blob\admin.py
+blob.migrations.__init__|1484104691810|D:\eclipse workspace\admin\blob\migrations\__init__.py
+-- END DISKCACHE
+-- START DICTIONARY
+13
+11=ArticleAdmin
+9=Migration
+1=admin.settings
+8=Article
+12=PersonAdmin
+13=BlobConfig
+4=blob.models
+6=blob.migrations.0001_initial
+2=admin.wsgi
+7=admin.urls
+5=blob.apps
+3=blob.admin
+10=Person
+-- END DICTIONARY
+-- START TREE 1
+21
+all|1|ALLOWED_HOSTS!11@
+app|1|application!19@
+art|2|ArticleAdmin!25@Article!33@
+aut|1|AUTH_PASSWORD_VALIDATORS!11@
+bas|1|BASE_DIR!11@
+blo|1|BlobConfig!41@
+dat|1|DATABASES!11@
+deb|1|DEBUG!11@
+ins|1|INSTALLED_APPS!11@
+lan|1|LANGUAGE_CODE!11@
+mid|1|MIDDLEWARE_CLASSES!11@
+mig|1|Migration!49@
+per|2|PersonAdmin!25@Person!33@
+roo|1|ROOT_URLCONF!11@
+sec|1|SECRET_KEY!11@
+sta|1|STATIC_URL!11@
+tem|1|TEMPLATES!11@
+tim|1|TIME_ZONE!11@
+url|1|urlpatterns!59@
+use|3|USE_L10N!11@USE_I18N!11@USE_TZ!11@
+wsg|1|WSGI_APPLICATION!11@
+-- END TREE
+-- START TREE 2
+14
+__s|1|__str__!8&34@
+con|1|content!8&35@
+dep|1|dependencies!9&51@
+fir|1|first_name!10&35@
+ful|1|full_name!10&35@
+ini|1|initial!9&51@
+las|1|last_name!10&35@
+lis|2|list_display!11&27@list_display!12&27@
+my_|1|my_property!10&34@
+nam|1|name!13&43@
+ope|1|operations!9&51@
+pub|1|pub_date!8&35@
+tit|1|title!8&35@
+upd|1|update_time!8&35@
+-- END TREE

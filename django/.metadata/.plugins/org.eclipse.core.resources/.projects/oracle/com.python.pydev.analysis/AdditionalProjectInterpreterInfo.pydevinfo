@@ -1,0 +1,60 @@
+-- VERSION_4
+-- START DISKCACHE
+D:\eclipse workspace\.metadata\.plugins\org.eclipse.core.resources\.projects\oracle\com.python.pydev.analysis\v2_indexcache
+myapp.admin|1486804932161|D:\eclipse workspace\oracle\myapp\admin.py
+oracle.settings|1487129864187|D:\eclipse workspace\oracle\oracle\settings.py
+myapp.views|1487815431396|D:\eclipse workspace\oracle\myapp\views.py
+oracle.wsgi|1486804639692|D:\eclipse workspace\oracle\oracle\wsgi.py
+myapp.migrations.0001_initial|1487657831261|D:\eclipse workspace\oracle\myapp\migrations\0001_initial.py
+myapp.migrations.__init__|1486804932170|D:\eclipse workspace\oracle\myapp\migrations\__init__.py
+myapp.tests|1486804932164|D:\eclipse workspace\oracle\myapp\tests.py
+oracle.__init__|1486804639714|D:\eclipse workspace\oracle\oracle\__init__.py
+myapp.__init__|1486804932167|D:\eclipse workspace\oracle\myapp\__init__.py
+myapp.models|1487668546774|D:\eclipse workspace\oracle\myapp\models.py
+oracle.urls|1487815026753|D:\eclipse workspace\oracle\oracle\urls.py
+manage|1486804639664|D:\eclipse workspace\oracle\manage.py
+-- END DISKCACHE
+-- START DICTIONARY
+9
+1=oracle.settings
+2=oracle.wsgi
+3=myapp.views
+7=test
+4=myapp.migrations.0001_initial
+8=test.Meta
+9=Migration
+5=myapp.models
+6=oracle.urls
+-- END DICTIONARY
+-- START TREE 1
+19
+all|1|ALLOWED_HOSTS!11@
+app|1|application!19@
+bas|1|BASE_DIR!11@
+dat|1|DATABASES!11@
+deb|1|DEBUG!11@
+ind|1|index!26@
+ins|1|INSTALLED_APPS!11@
+lan|1|LANGUAGE_CODE!11@
+mid|1|MIDDLEWARE_CLASSES!11@
+mig|1|Migration!33@
+roo|1|ROOT_URLCONF!11@
+sec|1|SECRET_KEY!11@
+sta|1|STATIC_URL!11@
+tem|1|TEMPLATES!11@
+tes|1|test!41@
+tim|1|TIME_ZONE!11@
+url|1|urlpatterns!51@
+use|3|USE_I18N!11@USE_TZ!11@USE_L10N!11@
+wsg|1|WSGI_APPLICATION!11@
+-- END TREE
+-- START TREE 2
+7
+ID|1|ID!7&43@
+db_|1|db_table!8&43@
+dep|1|dependencies!9&35@
+met|1|Meta!7&41@
+nam|1|name!7&43@
+num|1|num!7&43@
+ope|1|operations!9&35@
+-- END TREE

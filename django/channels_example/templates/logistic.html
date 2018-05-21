@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    html, body{
+        min-width: 300px;
+    }
+</style>
+<body>
+    {% if q == None %}
+        请输入正确的查询码
+    {% else %}
+        <div class="caption caption_4" align="center">
+            <table>
+                <tr>
+                <td colspan="2" align="center">牛奶信息</td>
+                </tr>
+                <tr>
+                    <td>名称：</td>
+                    <td>{{h_list.PRONAME}}</td>
+                </tr>
+                <tr>
+                    <td>厂家：</td>
+                    <td>{{h_list.PROSELLER}}</td>
+                </tr>
+                <tr>
+                    <td>买家：</td>
+                    <td>{{h_list.PROSHOPNAME}}</td>
+                </tr>
+                <tr>
+                <td colspan="2" align="center">货车信息</td>
+                </tr>
+                <tr>
+                    <td>车牌号：</td>
+                    <td>{{i_list.CARID}}</td>
+                </tr>
+                <tr>
+                    <td>货运公司：</td>
+                    <td>{{i_list.COMPANY}}</td>
+                </tr>
+                <tr>
+                    <td>车辆注册年份：</td>
+                    <td>{{i_list.REGISTERTIME}}</td>
+                </tr>
+                <tr>
+                    <td>车厢温度：</td>
+                    <td>{{k_list.TEMPERATURE}}</td>
+                </tr>
+                <tr>
+                    <td>车厢湿度：</td>
+                    <td>{{k_list.HUMIDITY}}</td>
+                </tr>
+                <tr>
+                <td colspan="2" align="center">司机信息</td>
+                </tr>
+                <tr>
+                    <td>司机编号：</td>
+                    <td>{{j_list.DRIVERID}}</td>
+                </tr>
+                <tr>
+                    <td>司机姓名：</td>
+                    <td>{{j_list.DRIVERNAME}}</td>
+                </tr>
+                <tr>
+                    <td>电话：</td>
+                    <td>{{j_list.DRIVERPHONE}}</td>
+                </tr>
+                <tr>
+                    <td>驾照有效期：</td>
+                    <td>{{j_list.DRILICENSE}}</td>
+                </tr>
+                <tr>
+                    <td>性别：</td>
+                    <td>{{j_list.SEX}}</td>
+                </tr>
+                <tr>
+                    <td>民族：</td>
+                    <td>{{j_list.NATION}}</td>
+                </tr>
+            </table>
+        </div>
+    {% endif %}
+</body>
+</html>

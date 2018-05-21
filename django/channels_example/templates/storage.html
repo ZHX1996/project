@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    html, body{
+        min-width: 300px;
+    }
+</style>
+<body>
+    {% if q == None %}
+        请输入正确的查询码
+    {% else %}
+        <div class="caption caption_3" align="center">
+            <table>
+                <tr>
+                <td colspan="2" align="center">仓库信息</td>
+                </tr>
+                <tr>
+                    <td>地址：</td>
+                    <td>{{f_list.DEPOTLOC}}</td>
+                </tr>
+                <tr>
+                    <td>温度：</td>
+                    <td>{{f_list.DEPOTTEM}}</td>
+                </tr>
+                <tr>
+                    <td>湿度：</td>
+                    <td>{{f_list.DEPOTHUM}}</td>
+                </tr>
+                <tr>
+                    <td>管理员：</td>
+                    <td>{{f_list.MANAGERNAME}}</td>
+                </tr>
+                <tr>
+                    <td>电话：</td>
+                    <td>{{f_list.MANAGERPHONE}}</td>
+                </tr>
+                <tr>
+                <td colspan="2" align="center">进出库信息</td>
+                </tr>
+                <tr>
+                    <td>名称：</td>
+                    <td>{{g_list.PRONAME}}</td>
+                </tr>
+                <tr>
+                    <td>进出库：</td>
+                    <td>{{g_list.PROINOREX}}</td>
+                </tr>
+            </table>
+        </div>
+    {% endif %}
+</body>
+</html>

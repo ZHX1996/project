@@ -1,0 +1,13 @@
+MODULES_MANAGER_V2
+app.__init__|D:\eclipse workspace\wechat\app\__init__.py
+app.admin|D:\eclipse workspace\wechat\app\admin.py
+app.migrations.__init__|D:\eclipse workspace\wechat\app\migrations\__init__.py
+app.models|D:\eclipse workspace\wechat\app\models.py
+app.tests|D:\eclipse workspace\wechat\app\tests.py
+app.urls|D:\eclipse workspace\wechat\app\urls.py
+app.views|D:\eclipse workspace\wechat\app\views.py
+manage|D:\eclipse workspace\wechat\manage.py
+wechat.__init__|D:\eclipse workspace\wechat\wechat\__init__.py
+wechat.settings|D:\eclipse workspace\wechat\wechat\settings.py
+wechat.urls|D:\eclipse workspace\wechat\wechat\urls.py
+wechat.wsgi|D:\eclipse workspace\wechat\wechat\wsgi.py

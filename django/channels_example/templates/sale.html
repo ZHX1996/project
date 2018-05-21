@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    html, body{
+        min-width: 300px;
+    }
+</style>
+<body>
+    {% if q == None %}
+        请输入正确的查询码
+    {% else %}
+        <div class="caption caption_5" align="center">
+            <table>
+                <tr>
+                <td colspan="2" align="center">销售情况</td>
+                </tr>
+                <tr>
+                    <td>超市名：</td>
+                    <td>{{l_list.MARKETNAME}}</td>
+                </tr>
+                <tr>
+                    <td>超市地址：</td>
+                    <td>{{l_list.MARKETLOC}}</td>
+                </tr>
+                <tr>
+                    <td>超市电话：</td>
+                    <td>{{l_list.MARKETTEL}}</td>
+                </tr>
+                <tr>
+                    <td>销售情况：</td>
+                    <td>{{l_list.SALEDORNOT}}</td>
+                </tr>
+            </table>
+        </div>
+    {% endif %}
+</body>
+</html>
