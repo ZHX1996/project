@@ -1,4 +1,3 @@
-import operator
 import copy
 from decisionTree01 import splitDataSet, majorityCnt, classify
 
@@ -57,7 +56,6 @@ def chooseBestSplit(dataSet):
 
 
 def createTree(dataSet, labels):
-
     '''
     创建决策树
     :param dataSet: 训练数据集
