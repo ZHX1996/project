@@ -85,9 +85,9 @@ soup1 = BeautifulSoup(html1, 'lxml')
 #     print(i.parent)
 
 # CSS选择器
-for li in soup1.select('li'):
-    print(li.get_text())
-
-for ul in soup1.select('ul'):
-    print(ul['id'])
-    print(ul.attrs['id'])
+# for li in soup1.select('li'):
+#     print(li.get_text())
+#
+# for ul in soup1.select('ul'):
+#     print(ul['id'])
+#     print(ul.attrs['id'])
