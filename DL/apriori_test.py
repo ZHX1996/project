@@ -1,5 +1,6 @@
 import pandas as pd
 from apriori import find_rule
+from apyori import apriori
 
 inputfile = 'F:/python data mining/chapter5/demo/data/menu_orders.xls'
 outputfile = 'C:/Users/Administrator/Desktop/apriori.xls'
@@ -14,4 +15,6 @@ del b
 support = 0.2
 confidence = 0.5
 ms = '--'
-find_rule(data, support, confidence, ms).to_excel(outputfile)
+# find_rule(data, support, confidence, ms).to_excel(outputfile)
+result = list(apriori(data, support, confidence))
+print(result)
