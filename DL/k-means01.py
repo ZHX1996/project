@@ -22,17 +22,18 @@ def kmeans():
     r.columns = list(data.columns) + [u'类别数目']  # 重命名表头
     # 对数据进行了标准化，所以在0附近
     print(r)
-
+    #
     # tsne = TSNE()
     # tsne.fit_transform(data_zs)
     # tsne = pd.DataFrame(tsne.embedding_, index = data.index)
+    # print(tsne)
     # plt.rcParams['font.sans-serif'] = ['SimHei']
     # plt.rcParams['axes.unicode_minus'] = False
-    # d = tsne[r[u'聚类类别'] == 0]
+    # d = tsne[r['聚类类别'] == 0]
     # plt.plot(d[0], d[1], 'r.')
-    # d = tsne[r[u'聚类类别'] == 1]
+    # d = tsne[r['聚类类别'] == 1]
     # plt.plot(d[0], d[1], 'go')
-    # d = tsne[r[u'聚类类别'] == 2]
+    # d = tsne[r['聚类类别'] == 2]
     # plt.plot(d[0], d[1], 'b*')
     # plt.show()
 
