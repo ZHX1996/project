@@ -8,7 +8,7 @@ from statsmodels.graphics.tsaplots import plot_pacf
 from statsmodels.stats.diagnostic import acorr_ljungbox
 from statsmodels.tsa.arima_model import ARIMA
 
-discfile = '/home/zhx/PycharmProjects/others/chapter5/data/arima_data.xls'
+discfile = 'C:/Users/Administrator/Desktop/chapter5/data/arima_data.xls'
 forecastnum = 5
 data = pd.read_excel(discfile, index_col=u'日期')
 
@@ -37,7 +37,7 @@ plot_pacf(D_data).show()
 print(u'差分序列的ADF检验结果为:', ADF(D_data[u'销量差分']))
 # 白噪声检验
 # 返回统计量和p值
-print(u'差分序列的白噪声检验结果为:', acorr_ljungbox(D_data, lags=1))
+# print(u'差分序列的白噪声检验结果为:', acorr_ljungbox(D_data, lags=1))
 
 # 定阶 一般阶数不超过length/10
 # pmax = int(len(D_data)/10)
