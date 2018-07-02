@@ -25,7 +25,14 @@ np.random.seed(1234)
 noise4 = np.random.randn(24)
 data4 = origindata+noise4
 
-print(data4[14:].tolist())
+# print(data4[14:].tolist())
+plot_acf(data3[0:14]).show()
+plot_pacf(data3[0:14]).show()
+plt.plot(data3[0:14])
+plt.show()
+# for i in range(10):
+    # print(adfuller(data1[i:i+14].diff().dropna()))
+    # print(acorr_ljungbox(data3[i:i+14], lags=1))
 
 # for i in range(10):
 #     AR1 = ARMA(data1[i:i+14], order=(1, 0)).fit(disp=-1)
