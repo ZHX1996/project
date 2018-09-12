@@ -4,47 +4,62 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.decomposition import PCA
 from sklearn.externals import joblib
 import io
+from sklearn import svm
+import numpy as np
+import csv
 
 
-def process_data():
+def train_data():
     label, message = [], []
     train_file = io.open('message_classification_train.csv', 'r', encoding='utf-8')
     for line in islice(train_file, 1, None):
         p = line.index(',')
-        label.append(line[:p])
+        label.append(0 if line[:p] == 'ham' else 1)
         message.append(line[p+2:-5])
     return label, message
 
 
-def tf_idf(message):
+def test_Data():
+    SmsId, message = [], []
+    test_file = io.open('test.csv', 'r', encoding='utf-8')
+    for line in islice(test_file, 1, None):
+        # print(line)
+        p = line.index(',')
+        SmsId.append(line[:p])
+        message.append(line[p+1:-1])
+    return SmsId, message
+
+
+def classfication(label, message, SmsId, text):
     vectorizer = CountVectorizer()
-    X = vectorizer.fit_transform(message)
-    # word = vectorizer.get_feature_names()
+    trainvec = vectorizer.fit_transform(message)
+    testvec = vectorizer.transform(text)
 
     transformer = TfidfTransformer()
-    word_vector = transformer.fit_transform(X)
-    weight = word_vector.toarray()
+    trainvec_word_vector = transformer.fit_transform(trainvec)
+    testvec_word_vector = transformer.transform(testvec)
+    trainData = trainvec_word_vector.toarray()
+    testData = testvec_word_vector.toarray()
 
-    # for i in range(len(weight)):
-    #     for j in range(len(word)):
-    print(weight.shape)
-    return weight
+    # pca = PCA(n_components=0.9)
+    # pcaTrainData = pca.fit_transform(trainData)
+    pca = joblib.load('pcaModel.pkl')
+    pcaTestData = pca.transform(testData)
+    # joblib.dump(pca, 'pcaModel.pkl', compress=3)
 
+    # svc = svm.SVC()
+    # svc.fit(pcaTrainData, label)
+    svc = joblib.load('svcModel.pkl')
+    result = svc.predict(pcaTestData)
+    # joblib.dump(svc, 'svcModel.pkl', compress=3)
 
-# 5574,9364->5574,2230
-def decompose(data):
-    pca = PCA(n_components=0.9)
-    newData = pca.fit_transform(data)
-    joblib.dump(newData, 'pcaModel.pkl', compress=3)
-    # print(newData.shape)
-
-
-def loadModel():
-    newData = joblib.load('pcaModel.pkl')
-    print(newData.shape)
+    with open('result.csv', 'w') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(['SmsId', 'Label'])
+        for i in range(min(len(SmsId), len(result))):
+            writer.writerow([SmsId[i], 'spam' if result[i] == 0 else 'ham'])
 
 if __name__ == '__main__':
-    # label, message = process_data()
-    # data = tf_idf(message)
-    # decompose(data)
-    loadModel()
+    label, message = train_data()
+    SmsId, test = test_Data()
+    classfication(label, message, SmsId, test)
