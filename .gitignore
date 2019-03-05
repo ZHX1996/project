@@ -1,0 +1,11 @@
+*.csv
+*.tsv
+*.class
+*.pkl
+*.gz
+*.zip
+CProject/
+java/
+data/
+otherLearn/
+.ipynb_checkpoints/
