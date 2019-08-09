@@ -16,4 +16,8 @@ class ScrapygooglesearchItem(scrapy.Item):
     collection = 'info'
     title = Field()
     address = Field()
-    # label = Field()
+
+class linkBodyItem(scrapy.Item):
+    collection = 'bodyContent'
+    content = Field()
+    address = Field()

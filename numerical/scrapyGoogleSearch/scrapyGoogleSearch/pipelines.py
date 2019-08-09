@@ -8,6 +8,7 @@ import pymongo
 import json
 import codecs
 import csv
+from scrapyGoogleSearch.items import ScrapygooglesearchItem, linkBodyItem
 
 
 class ScrapygooglesearchPipeline(object):
@@ -16,27 +17,71 @@ class ScrapygooglesearchPipeline(object):
 
 
 class MongodbPipeline(object):
-    def __init__(self, mongo_url, mongo_db):
+    def __init__(self, mongo_url, mongo_db, max_page, linkKeys):
         self.mongo_url = mongo_url
         self.mongo_db = mongo_db
+        self.max_page = max_page
+        self.linkKeys = linkKeys
+        self.k = 0
+        self.tmp = []
+        self.title = []
+        self.address = []
+        self.a = 0
 
 
     @classmethod
     def from_crawler(cls, crawler):
-        return cls(mongo_url=crawler.settings.get('MONGO_URL'), mongo_db=crawler.settings.get('MONGO_DB'))
+        return cls(mongo_url=crawler.settings.get('MONGO_URL'), mongo_db=crawler.settings.get('MONGO_DB'),
+        linkKeys=crawler.settings.get('WEBSITE_HIGH'), max_page=crawler.settings.get('MAX_PAGE'))
 
 
     def open_spider(self, spider):
         self.client = pymongo.MongoClient(self.mongo_url, port=27017)
         self.db = self.client[self.mongo_db]
         collist = self.db.collection_names()
-        if 'titleLink' in collist:
-            self.db.titleLink.drop()
+        if 'high' in collist:
+            self.db.high.drop()
+        if 'low' in collist:
+            self.db.low.drop()
 
 
     def process_item(self, item, spider):
-        self.db.titleLink.insert(dict(item))
-        return item
+        if isinstance(item, ScrapygooglesearchItem):
+            self.a += 1
+            self.title += item['title'].split(';')
+            self.address += item['address'].split(';')
+            if self.a == self.max_page:
+                for i in range(len(self.title)):
+                    if i == 0:
+                        self.db.high.update({'address': self.address[i]},{"$set":{'address': self.address[i], 'title': self.title[i]}}, True)
+                        self.tmp.append(self.address[i])
+                    else:
+                        self.k = 0
+                        for j in range(len(self.tmp)):
+                            if self.tmp[j] in self.address[i] or self.address[i] in self.tmp[j]:
+                                self.k += 1
+                        if self.k == 0:
+                            self.tmp.append(self.address[i])
+
+                            for linkKey in self.linkKeys:
+                                if linkKey in self.address[i]:
+                                    self.k += 1
+                            if self.k > 0:
+                                self.db.high.update({'address': self.address[i]},{"$set":{'address': self.address[i], 'title': self.title[i]}}, True)
+                            else:  
+                                self.db.low.update({'address': self.address[i]},{"$set":{'address': self.address[i], 'title': self.title[i]}}, True)
+                self.title,self.address,self.a,self.tmp = [],[],0,[]
+
+        if isinstance(item, linkBodyItem):
+            self.k = 0
+            for linkKey in self.linkKeys:
+                if linkKey in item['address']:
+                    self.k += 1
+            if self.k > 0:
+                self.db.high.update({'address': item['address']},{"$set":{'content': item['content']}}, True)
+            else:  
+                self.db.low.update({'address': item['address']},{"$set":{ 'content': item['content']}}, True)
+        
 
     def close_spider(self, spider):
         self.client.close()

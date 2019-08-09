@@ -14,9 +14,9 @@ BOT_NAME = 'scrapyGoogleSearch'
 SPIDER_MODULES = ['scrapyGoogleSearch.spiders']
 NEWSPIDER_MODULE = 'scrapyGoogleSearch.spiders'
 
-KEYWORDS = ['人权观察','救世军']
+KEYWORDS = ['人权观察']
 WEBSITE_HIGH = ['wikipedia','twitter','youtube','bbc','baike','facebook']
-MAX_PAGE = 2
+MAX_PAGE = 1
 MONGO_URL = 'localhost'
 MONGO_DB = 'GoogleSearch'
 FEED_EXPORT_ENCODING = 'utf-8'
@@ -29,8 +29,8 @@ DOWNLOADER_MIDDLEWARES = {
 }
 
 ITEM_PIPELINES = {
-    # 'scrapyGoogleSearch.pipelines.MongodbPipeline': 300,
-    'scrapyGoogleSearch.pipelines.Pipeline_ToCSV': 100,
+    'scrapyGoogleSearch.pipelines.MongodbPipeline': 300,
+    # 'scrapyGoogleSearch.pipelines.Pipeline_ToCSV': 100,
 }
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent

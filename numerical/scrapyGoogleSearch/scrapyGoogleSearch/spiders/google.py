@@ -2,8 +2,9 @@
 import scrapy
 from scrapy import Request, Spider
 from urllib.parse import quote
-from scrapyGoogleSearch.items import ScrapygooglesearchItem
+from scrapyGoogleSearch.items import ScrapygooglesearchItem, linkBodyItem
 from scrapy.shell import inspect_response
+import re
 
 
 class GoogleSpider(scrapy.Spider):
@@ -17,8 +18,6 @@ class GoogleSpider(scrapy.Spider):
 
         products = response.xpath('//div[@id="rso"]/div/div[contains(@class,"srg")]/div[contains(@class,"g")]')
         for product in products:
-            # item['address'] = ''.join(product.xpath('//div[@class="rc"]/div[@class="r"]/a/@href').extract()).strip()
-            # item['title'] = ''.join(product.xpath('//div[@class="rc"]/div[@class="r"]/a/h3/text()').extract()).strip()
             address = product.xpath('//div[@class="rc"]/div[@class="r"]/a[1]/@href').extract()
             title = product.xpath('//div[@class="rc"]/div[@class="r"]/a[1]/h3/text()').extract()
             break
@@ -28,11 +27,25 @@ class GoogleSpider(scrapy.Spider):
         item['address'] = ';'.join(address)
         yield item
 
-        # for i in range(len(title)):
-        #     item = ScrapygooglesearchItem()
-        #     item['title'] = title[i]
-        #     item['address'] = address[i]
-        #     yield item
+        for i in range(len(address)):
+            yield Request(url = address[i], callback=self.parse_body, dont_filter=True)
+
+
+    def parse_body(self, response):
+        # content = response.xpath("//body//text()").extract()
+        # content1 = response.xpath("//body//script//text()").extract()
+        # content1 += response.xpath("//body//style//text()").extract()
+        # content = [x for x in content if x not in content1]
+        
+        # content = list(map(lambda x: re.sub(r'[\\n \\r \\t]','',x.strip()), content))
+        # content = list(filter(None, content))
+        # contentItem['content'] = ';'.join(content)
+
+        contentItem = linkBodyItem()
+        # body:二进制类型   text:string类型      包含' \r \n \t \'
+        contentItem['content'] = response.text 
+        contentItem['address'] = response.url
+        yield contentItem
 
                                                                                     
     def start_requests(self):
