@@ -14,10 +14,20 @@ class ScrapygooglesearchItem(scrapy.Item):
     # name = scrapy.Field()
     # pass
     collection = 'info'
+    key = Field()
     title = Field()
     address = Field()
 
 class linkBodyItem(scrapy.Item):
     collection = 'bodyContent'
+    key = Field()
     content = Field()
+    title = Field()
+    intro = Field()
     address = Field()
+
+class facebookIntroItem(scrapy.Item):
+    title = Field()
+    address = Field()
+    key = Field()
+    intro = Field()

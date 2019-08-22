@@ -8,7 +8,8 @@ import pymongo
 import json
 import codecs
 import csv
-from scrapyGoogleSearch.items import ScrapygooglesearchItem, linkBodyItem
+from scrapyGoogleSearch.items import ScrapygooglesearchItem, linkBodyItem, facebookIntroItem
+import re
 
 
 class ScrapygooglesearchPipeline(object):
@@ -17,11 +18,12 @@ class ScrapygooglesearchPipeline(object):
 
 
 class MongodbPipeline(object):
-    def __init__(self, mongo_url, mongo_db, max_page, linkKeys):
+    def __init__(self, mongo_url, mongo_db, max_page, linkKeys, keywords):
         self.mongo_url = mongo_url
         self.mongo_db = mongo_db
         self.max_page = max_page
         self.linkKeys = linkKeys
+        self.keywords = keywords
         self.k = 0
         self.tmp = []
         self.title = []
@@ -32,17 +34,16 @@ class MongodbPipeline(object):
     @classmethod
     def from_crawler(cls, crawler):
         return cls(mongo_url=crawler.settings.get('MONGO_URL'), mongo_db=crawler.settings.get('MONGO_DB'),
-        linkKeys=crawler.settings.get('WEBSITE_HIGH'), max_page=crawler.settings.get('MAX_PAGE'))
+        linkKeys=crawler.settings.get('WEBSITE_HIGH'), max_page=crawler.settings.get('MAX_PAGE'), keywords=crawler.settings.get('KEYWORDS'))
 
 
     def open_spider(self, spider):
         self.client = pymongo.MongoClient(self.mongo_url, port=27017)
         self.db = self.client[self.mongo_db]
         collist = self.db.collection_names()
-        if 'high' in collist:
-            self.db.high.drop()
-        if 'low' in collist:
-            self.db.low.drop()
+        for key in self.keywords:
+            if key in collist:
+                self.db[key].drop()
 
 
     def process_item(self, item, spider):
@@ -50,10 +51,13 @@ class MongodbPipeline(object):
             self.a += 1
             self.title += item['title'].split(';')
             self.address += item['address'].split(';')
+            # print(self.title)
+            print(self.max_page)
             if self.a == self.max_page:
                 for i in range(len(self.title)):
+                    # self.db[item['key']].insert({self.title[i]: {'address':self.address[i]}})
                     if i == 0:
-                        self.db.high.update({'address': self.address[i]},{"$set":{'address': self.address[i], 'title': self.title[i]}}, True)
+                        self.db[item['key']].insert({self.title[i]: {'address':self.address[i]}})
                         self.tmp.append(self.address[i])
                     else:
                         self.k = 0
@@ -62,26 +66,37 @@ class MongodbPipeline(object):
                                 self.k += 1
                         if self.k == 0:
                             self.tmp.append(self.address[i])
-
-                            for linkKey in self.linkKeys:
-                                if linkKey in self.address[i]:
-                                    self.k += 1
-                            if self.k > 0:
-                                self.db.high.update({'address': self.address[i]},{"$set":{'address': self.address[i], 'title': self.title[i]}}, True)
-                            else:  
-                                self.db.low.update({'address': self.address[i]},{"$set":{'address': self.address[i], 'title': self.title[i]}}, True)
+                            self.db[item['key']].insert({self.title[i]: {'address':self.address[i]}})
                 self.title,self.address,self.a,self.tmp = [],[],0,[]
 
         if isinstance(item, linkBodyItem):
-            self.k = 0
-            for linkKey in self.linkKeys:
-                if linkKey in item['address']:
-                    self.k += 1
-            if self.k > 0:
-                self.db.high.update({'address': item['address']},{"$set":{'content': item['content']}}, True)
-            else:  
-                self.db.low.update({'address': item['address']},{"$set":{ 'content': item['content']}}, True)
+            cursor = self.db[item['key']].find({item['title']+".address": re.compile(item['address'])})
+            for dic in cursor:
+                key = [i for i in dic.keys()]
+                value = [j for j in dic.values()]
+                try:
+                    value[1]['content'] = item['content']
+                    value[1]['intro'] = item['intro']
+                    self.db[item['key']].update_one({key[0]:value[0]}, {'$set':{key[1]:value[1]}}, True)
+                except:
+                    value[0]['content'] = item['content']
+                    value[0]['intro'] = item['intro']
+                    self.db[item['key']].update_one({key[1]:value[1]}, {'$set':{key[0]:value[0]}}, True)
+            
         
+
+        if isinstance(item, facebookIntroItem):
+            cursor = self.db[item['key']].find({item['title']+".address": re.compile(item['address'])})
+            for dic in cursor:
+                key = [i for i in dic.keys()]
+                value = [j for j in dic.values()]
+                try:
+                    value[1]['intro'] = item['intro']
+                    self.db[item['key']].update_one({key[0]:value[0]}, {'$set':{key[1]:value[1]}}, True)
+                except:
+                    value[0]['intro'] = item['intro']
+                    self.db[item['key']].update_one({key[1]:value[1]}, {'$set':{key[0]:value[0]}}, True)
+            
 
     def close_spider(self, spider):
         self.client.close()

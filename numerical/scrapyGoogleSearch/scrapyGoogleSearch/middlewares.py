@@ -12,7 +12,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from scrapy.http import HtmlResponse
-from logging import getLogger
+# from logging import getLogger
 # from pyvirtualdisplay import Display
 
 # 虚拟页面
@@ -22,7 +22,7 @@ from logging import getLogger
 
 class SeleniumMiddleware():
     def __init__(self, timeout=None, service_args=[]):
-        self.logger = getLogger(__name__)
+        # self.logger = getLogger(__name__)
         self.timeout = timeout
         self.chrome_options = webdriver.ChromeOptions()
         # self.chrome_options.add_extension('./scrapyGoogleSearch/chromeplugin.crx')
@@ -45,7 +45,7 @@ class SeleniumMiddleware():
     
     def process_request(self, request, spider):
         if 'www.google.com' in request.url:
-            self.logger.debug('chrome is starting')
+            # self.logger.debug('chrome is starting')
             page = request.meta.get('page', 1)
             try:
                 self.browser.get(request.url)
