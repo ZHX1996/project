@@ -42,15 +42,18 @@ from bs4 import BeautifulSoup
 
 
 class ProxyMiddleware(object):
-    def __init__(self, ip):
+    def __init__(self, ip, user_agent):
         self.ip = ip
+        self.user_agent = user_agent
 
     @classmethod
     def from_crawler(cls, crawler):
-        return cls(ip=crawler.settings.get('PROXIES'))
+        return cls(ip=crawler.settings.get('PROXIES'),user_agent=crawler.settings.get('AGENTS'))
+
 
     def process_request(self, request, spider):
         request.meta['proxy'] = 'http://' + random.choice(self.ip)
+        request.headers['User-Agent'] = random.choice(self.user_agent)
 
 
 

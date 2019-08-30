@@ -3,6 +3,9 @@ import scrapy
 import requests
 from scrapy import Request, Spider
 from huanqiuCharity.items import HuanqiucharityItem
+from scrapy.spidermiddlewares.httperror import HttpError
+from twisted.internet.error import DNSLookupError
+from twisted.internet.error import TimeoutError, TCPTimedOutError
 
 class CharitySpider(scrapy.Spider):
     name = 'charity'
@@ -32,6 +35,7 @@ class CharitySpider(scrapy.Spider):
                 tmp = dict(tmp)
                 links.append(tmp['eName'])
 
+
         for link in links:
             yield Request(url = link, callback=self.parse_linkBody, dont_filter=True)
         
@@ -47,14 +51,7 @@ class CharitySpider(scrapy.Spider):
         EnglishName = response.xpath('/html/body/div[4]/div[1]/div[1]/span/text()').extract()
         focusGroup = response.xpath('/html/body/div[4]/div[1]/div[1]/div[2]/div[2]/text()').extract()
         introduction = response.xpath('/html/body/div[4]/div[1]/div[1]/div[3]/text()').extract()
-        establishedYear = response.xpath('//*[@id="base-info"]/dl[1]/dd/text()').extract()
-        registration = response.xpath('//*[@id="base-info"]/dl[2]/dd/text()').extract()
-        responsible = response.xpath('//*[@id="base-info"]/dl[3]/dd/text()').extract()
         slogan = response.xpath('//*[@id="slogan"]//p//text()').extract()
-        email = response.xpath('//*[@id="contact"]/dl[1]/dd/text()').extract()
-        url = response.xpath('//*[@id="contact"]/dl[2]/dd/a/@href').extract()
-        phone = response.xpath('//*[@id="contact"]/dl[3]/dd/text()').extract()
-        address = response.xpath('//*[@id="contact"]/dl[4]/dd/text()').extract()
 
         def litostr(li):
             return ''.join([i.strip() for i in li])
@@ -65,65 +62,96 @@ class CharitySpider(scrapy.Spider):
         EnglishName = litostr(EnglishName)
         focusGroup = litostr(focusGroup)
         introduction = litostr(introduction)
-        establishedYear = litostr(establishedYear)
-        registration = litostr(registration)
-        responsible = litostr(responsible)
         slogan = litostr(slogan)
-        email = litostr(email)
-        url = litostr(url)
-        phone = litostr(phone)
-        address = litostr(address)
 
-        # 资金来源 大事记 所获奖项  其他联系方式
-        # 捐款方式 项目信息   有大小标题
-        dic = {'资金来源': 'sourceofFunds',
-        '大事记':'bigThing',
-        '所获奖项':'award',
-        '其他联系方式':'otherContact',
-        '捐款方式':'donation',
-        '项目信息':'project'}
-        tmp = response.xpath('/html/body/div[4]/div[2]/div').extract()
-        for i in range(2, len(tmp)+1):
-            k = response.xpath('/html/body/div[4]/div[2]/div['+str(i)+']//text()').extract()            
-            k = list(filter(None, [l.strip() for l in k ]))
-            # m = ''
-            # if k[0] == '项目信息':
-            #     try:
-            #         for i in range(1, len(k), 2):
-            #             m += k[i]+':'+k[i+1]
-            #     except:
-            #         m = ' '.join(k[1:])
-            # else:
-            #     m = ' '.join(k[1:])
-            
-            # charityItem[dic[k[0]]] = m
-            charityItem[dic[k[0]]] = '$'.join(k[1:])
-        
-        for k in list(dic.values()):
-            try:
-                charityItem[k] 
-            except:
-                charityItem[k] = ' '
 
-        
         charityItem['imgsrc'] = imgsrc
         charityItem['focusArea'] = focusArea
         charityItem['ChineseName'] = ChineseName
         charityItem['EnglishName'] = EnglishName
         charityItem['focusGroup'] = focusGroup
         charityItem['introduction'] = introduction
-        charityItem['establishedYear'] = establishedYear
-        charityItem['registration'] = registration
-        charityItem['responsible'] = responsible
         charityItem['slogan'] = slogan
-        charityItem['email'] = email
-        charityItem['url'] = url
-        charityItem['phone'] = phone
-        charityItem['address'] = address
+
+        dic = {'资金来源': 'sourceofFunds',
+        '大事记':'bigThing',
+        '所获奖项':'award',
+        '其他联系方式':'otherContact',
+        '捐款方式':'donation',
+        '项目信息':'project',
+        '缩写名称：': 'abbreviation',
+        '成立年份：': 'establishedYear',
+        '负责人：': 'responsible',
+        '注册地：': 'registration',
+        '邮箱：': 'email',
+        '网址：': 'url',
+        '电话：': 'phone',
+        '地址：': 'address',
+        '本地名称：': 'localName',
+        '图片链接': 'imgsrc',
+        '源链接': 'sourceUrl',
+        '关注领域': 'focusArea',
+        '中文名称': 'ChineseName',
+        '英文名称': 'EnglishName',
+        '关注群体': 'focusGroup',
+        '简介': 'introduction',
+        '口号': 'slogan'
+        }
+
+        tmp = response.xpath('/html/body/div[4]/div[2]/div').extract()
+        for i in range(2, len(tmp)+1):
+            k = response.xpath('/html/body/div[4]/div[2]/div['+str(i)+']//text()').extract()            
+            k = list(filter(None, [l.strip().replace('\n', '') for l in k ]))
+            charityItem[dic[k[0]]] = '$'.join(k[1:])
+
+        tmp = response.xpath('//*[@id="base-info"]//text()').extract()
+        for i in range(1, len(tmp), 2):
+            try:
+                charityItem[dic[tmp[i]]] = tmp[i+1]
+            except:
+                charityItem[dic[tmp[i]]] = 'null'
+                print("awsl")
+
+        tmp = response.xpath('//*[@id="contact"]//text()').extract()
+        for i in range(1, len(tmp), 2):
+            charityItem[dic[tmp[i]]] = tmp[i+1]
+
+
+        for k in list(dic.values()):
+            try:
+                charityItem[k]
+            except:
+                charityItem[k] = 'null'
 
         yield charityItem
 
 
     def start_requests(self):
         url = self.start_urls[0]
-        yield Request(url=url, callback=self.parse, dont_filter=True)
+        yield Request(url=url, callback=self.parse, dont_filter=True, errback=self.print_err)
+        
+
+    def print_err(self, failure):
+        # log all failures
+       self.logger.error(repr(failure))
+
+       # in case you want to do something special for some errors,
+       # you may need the failure's type:
+
+       if failure.check(HttpError):
+           # these exceptions come from HttpError spider middleware
+           # you can get the non-200 response
+           response = failure.value.response
+           self.logger.error('awsl HttpError on %s', response.url)
+
+       elif failure.check(DNSLookupError):
+           # this is the original request
+           request = failure.request
+           self.logger.error('awsl DNSLookupError on %s', request.url)
+
+       elif failure.check(TimeoutError, TCPTimedOutError):
+           request = failure.request
+           self.logger.error('awsl TimeoutError on %s', request.url)
+        else:
+            request = failure.request
+            self.logger.error('awsl on %s', request.url)
