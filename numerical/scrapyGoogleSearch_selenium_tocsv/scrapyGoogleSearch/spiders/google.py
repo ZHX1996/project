@@ -7,7 +7,6 @@ from scrapy.shell import inspect_response
 import re
 import json
 import html
-import chardet
 
 
 class GoogleSpider(scrapy.Spider):
@@ -16,7 +15,7 @@ class GoogleSpider(scrapy.Spider):
     start_urls = 'https://www.google.com/search?q='
 
 
-    def parse(self, response, key):
+    def parse(self, response):
         # inspect_response(response, self)
 
         products = response.xpath('//div[@id="rso"]/div/div[contains(@class,"srg")]/div[contains(@class,"g")]')
@@ -25,60 +24,41 @@ class GoogleSpider(scrapy.Spider):
             title = product.xpath('//div[@class="rc"]/div[@class="r"]/a[1]/h3/div/text()').extract()
             break
 
-        print('\n')
-        print(address)
-        print(title)
-        print('\n')
-        title = [x.replace('.','') for x in title]
         item = ScrapygooglesearchItem()
         item['title'] = ';'.join(title)
         item['address'] = ';'.join(address)
-        item['key'] = key
         yield item
 
-        for i in range(min(len(title),len(address))):
-            yield Request(url = address[i], callback=lambda response, key=key, title=title[i]: self.parse_body(response, key,  title), dont_filter=True)
+        for i in range(len(address)):
+            yield Request(url = address[i], callback=self.parse_body, dont_filter=True)
 
 
-    def parse_body(self, response, key, title):
+    def parse_body(self, response):
+        # content = response.xpath("//body//text()").extract()
+        # content1 = response.xpath("//body//script//text()").extract()
+        # content1 += response.xpath("//body//style//text()").extract()
+        # content = [x for x in content if x not in content1]
+        
+        # content = list(map(lambda x: re.sub(r'[\\n \\r \\t]','',x.strip()), content))
+        # content = list(filter(None, content))
+        # contentItem['content'] = ';'.join(content)
+
         contentItem = linkBodyItem()
         # body:二进制类型   text:string类型      包含' \r \n \t \
         tmp = response.text
-
-        # tmp = re.sub(r'\n', '', tmp)
+        tmp = re.sub(r'\n', '', tmp)
         tmp = re.sub(r'\r', '', tmp)
         tmp = re.sub(r'\t', '', tmp)
         tmp = re.sub(r'"', "'", tmp)
         tmp = html.unescape(tmp)
-        # tmp = re.sub(r'gb2312', 'utf-8', tmp)
+        tmp = re.sub(r'gb2312', 'utf-8', tmp)
 
-        pattern = re.compile(r'<script.*?</script>', re.DOTALL)
+        pattern = re.compile(r'<script.*?</script>')
         tmp = pattern.sub(r'', tmp)
-        pattern = re.compile(r'<scip.*?</scip>', re.DOTALL)
+        pattern = re.compile(r'<scip.*?</scip>')
         tmp = pattern.sub(r'', tmp)
-        # pattern = re.compile(r'<.*?</[\w\W]*?>', re.DOTALL)
-        # tmp = pattern.sub(r'', tmp)
-        pattern = re.compile(r'<[\w\W]*?>')
-        tmp = pattern.sub(r'', tmp)
-
-
-        # r = response.text
-        # con = html.unescape(r)
-        # pattern = re.compile(r'<script.*?</script>')
-        # con = pattern.sub(r'', con)
-        # pattern = re.compile(r'<scip.*?</scip>')
-        # con = pattern.sub(r'', con)
-        # def remove_rub(string):
-        #     rub = re.findall(r'<[\w\W]*?>',string)  #去掉<>里面的所有代码，因为数据没有在标签的<>里面，
-        #     for r in rub:
-        #         string = string.replace(r,'')
-        #     return(string.replace('\t','').replace('\r',''))  #去掉  \t 和回车
-        # all_data = remove_rub(con)
-        # all_data = "".join([s for s in all_data.splitlines(True) if s.strip()])
 
         contentItem['content'] = tmp
-        contentItem['key'] = key
-        contentItem['title'] = title
         contentItem['address'] = response.url
 
         str2 = ""
@@ -101,20 +81,18 @@ class GoogleSpider(scrapy.Spider):
 
         yield contentItem
         if str2 !="":
-            yield Request(url = str2, callback=lambda response, key=key, title = title,address=str1: self.parse_facebook_intro(response,key,title,address), dont_filter=True)
+            yield Request(url = str2, callback=lambda response, address = str1: self.parse_facebook_intro(response, address), dont_filter=True)
 
-    def parse_facebook_intro(self, response, key, title, address):
+    def parse_facebook_intro(self, response, address):
         facebookintroItem = facebookIntroItem()
-        facebookintroItem['key'] = key
-        facebookintroItem['title'] = title
         facebookintroItem['address'] = address
         facebookintroItem['intro'] = ''.join(response.xpath('//*[@id="PagesProfileAboutInfoPagelet_152100711485335"]/div[3]/div[1]/div/div[3]//div[@class="_5aj7 _3-8j"]//text()').extract())
         yield facebookintroItem
         
         
     def start_requests(self):
-        for keyword in self.settings.get('KEYWORDS'):            
-            for page in range(0, self.settings.get('MAX_PAGE')):
-                url = self.start_urls + quote(keyword) + '&start=' + quote(str(page*10))
-                print(url)
-                yield Request(url=url, callback=lambda response, key=keyword :self.parse(response, key),dont_filter=True)
+        for keyword in self.settings.get('KEYWORDS'):
+            for page in range(1, self.settings.get('MAX_PAGE')+1):
+                url = self.start_urls + quote(keyword)
+                yield Request(url=url, callback=self.parse, meta={'page':page},dont_filter=True)
+

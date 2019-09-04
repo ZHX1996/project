@@ -35,6 +35,10 @@ class CharitySpider(scrapy.Spider):
                 tmp = dict(tmp)
                 links.append(tmp['eName'])
 
+        # links = ['http://charity.huanqiu.com/crisis_control_ministry',
+        #          'http://charity.huanqiu.com/actspwc',
+        #          'http://charity.huanqiu.com/jewish_world_watch']
+
 
         for link in links:
             yield Request(url = link, callback=self.parse_linkBody, dont_filter=True)
@@ -133,25 +137,25 @@ class CharitySpider(scrapy.Spider):
 
     def print_err(self, failure):
         # log all failures
-       self.logger.error(repr(failure))
+        self.logger.error(repr(failure))
 
-       # in case you want to do something special for some errors,
-       # you may need the failure's type:
+        # in case you want to do something special for some errors,
+        # you may need the failure's type:
 
-       if failure.check(HttpError):
-           # these exceptions come from HttpError spider middleware
-           # you can get the non-200 response
-           response = failure.value.response
-           self.logger.error('awsl HttpError on %s', response.url)
+        if failure.check(HttpError):
+            # these exceptions come from HttpError spider middleware
+            # you can get the non-200 response
+            response = failure.value.response
+            self.logger.error('awsl HttpError on %s', response.url)
 
-       elif failure.check(DNSLookupError):
-           # this is the original request
-           request = failure.request
-           self.logger.error('awsl DNSLookupError on %s', request.url)
+        elif failure.check(DNSLookupError):
+            # this is the original request
+            request = failure.request
+            self.logger.error('awsl DNSLookupError on %s', request.url)
 
-       elif failure.check(TimeoutError, TCPTimedOutError):
-           request = failure.request
-           self.logger.error('awsl TimeoutError on %s', request.url)
+        elif failure.check(TimeoutError, TCPTimedOutError):
+            request = failure.request
+            self.logger.error('awsl TimeoutError on %s', request.url)
         else:
             request = failure.request
             self.logger.error('awsl on %s', request.url)

@@ -16,18 +16,17 @@ NEWSPIDER_MODULE = 'scrapyGoogleSearch.spiders'
 
 KEYWORDS = ['人权观察']
 WEBSITE_HIGH = ['wikipedia','twitter','youtube','bbc','baike','facebook']
-MAX_PAGE = 2
+MAX_PAGE = 1
 MONGO_URL = 'localhost'
 MONGO_DB = 'GoogleSearch'
 FEED_EXPORT_ENCODING = 'utf-8'
 
 SELENIUM_TIMEOUT = 20
+CHROME_SERVICE_ARGS = ['--load-images=false','--disk-cache=true']
 
 DOWNLOADER_MIDDLEWARES = {
-    'scrapyGoogleSearch.middlewares.ProxyMiddleware': 300,
+    'scrapyGoogleSearch.middlewares.SeleniumMiddleware': 543,
 }
-
-AGENTS = 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.0.1594 Safari/537.36'
 
 ITEM_PIPELINES = {
     'scrapyGoogleSearch.pipelines.MongodbPipeline': 300,

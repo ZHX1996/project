@@ -6,21 +6,65 @@
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
+from selenium import webdriver
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from scrapy.http import HtmlResponse
-import random
+# from logging import getLogger
+# from pyvirtualdisplay import Display
 
+# 虚拟页面
+# from pyvirtualdisplay import Display
+# display = Display(visible=0,size=(800,600))
+# display.start()
 
-class ProxyMiddleware(object):
-    def __init__(self, user_agent):
-        self.user_agent = user_agent
+class SeleniumMiddleware():
+    def __init__(self, timeout=None, service_args=[]):
+        # self.logger = getLogger(__name__)
+        self.timeout = timeout
+        self.chrome_options = webdriver.ChromeOptions()
+        # self.chrome_options.add_extension('./scrapyGoogleSearch/chromeplugin.crx')
+        self.chrome_options.add_argument("--user-data-dir="+r"C:/Users/Administrator.SC-201905252025/AppData/Local/Google/Chrome/User Data/")
+        # 1:加载所有图片 2：禁止加载  3.禁止加载第三方图片
+        prefs = {"profile.managed_default_content_settings.images":1}
+        self.chrome_options.add_experimental_option("prefs",prefs)
+
+        # display = Display(visible=0,size=(800,600))
+        # display.start()
+
+        self.browser = webdriver.Chrome(service_args=service_args,chrome_options=self.chrome_options)
+        # self.browser.set_window_size(1280, 768)
+        self.browser.set_page_load_timeout(self.timeout)
+        self.wait = WebDriverWait(self.browser, self.timeout)
+
+    def __del__(self):
+        self.browser.close()
+
+    
+    def process_request(self, request, spider):
+        if 'www.google.com' in request.url:
+            # self.logger.debug('chrome is starting')
+            page = request.meta.get('page', 1)
+            try:
+                self.browser.get(request.url)
+                if page>1:
+                    nextPage = self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR,'div#main div#cnt.mdm div.mw div#rcnt div.col div#center_col div div#foot span#xjs div#navcnt table#nav tbody tr td.navend a#pnnext.pn > span.csb.ch')))
+                    nextPage.click()
+                # self.wait.until(EC.text_to_be_present_in_element((By.CSS_SELECTOR, '#nav > tbody > tr > td.cur'), str(page)))
+                self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR,'div#main div#cnt.mdm div.mw div#rcnt div.col div#center_col div#res.med div#search div div#rso div div.srg > div.g')))
+                return HtmlResponse(url=request.url, body=self.browser.page_source,request=request,encoding='utf-8',status=200)
+            except TimeoutException:
+                return HtmlResponse(url=request.url, status=500, request=request)
+        else:
+            return None
+            
+
 
     @classmethod
     def from_crawler(cls, crawler):
-        return cls(user_agent=crawler.settings.get('AGENTS'))
-
-
-    def process_request(self, request, spider):
-        request.headers['User-Agent'] = self.user_agent
+        return cls(timeout=crawler.settings.get('SELENIUM_TIMEOUT'),service_args=crawler.settings.get('CHROME_SERVICE_ARGS'))
 
 
 class ScrapygooglesearchSpiderMiddleware(object):

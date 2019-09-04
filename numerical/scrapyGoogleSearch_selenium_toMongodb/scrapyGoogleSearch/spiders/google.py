@@ -7,7 +7,6 @@ from scrapy.shell import inspect_response
 import re
 import json
 import html
-import chardet
 
 
 class GoogleSpider(scrapy.Spider):
@@ -26,8 +25,8 @@ class GoogleSpider(scrapy.Spider):
             break
 
         print('\n')
-        print(address)
-        print(title)
+        print(len(address))
+        print(len(title))
         print('\n')
         title = [x.replace('.','') for x in title]
         item = ScrapygooglesearchItem()
@@ -41,6 +40,15 @@ class GoogleSpider(scrapy.Spider):
 
 
     def parse_body(self, response, key, title):
+        # content = response.xpath("//body//text()").extract()
+        # content1 = response.xpath("//body//script//text()").extract()
+        # content1 += response.xpath("//body//style//text()").extract()
+        # content = [x for x in content if x not in content1]
+        
+        # content = list(map(lambda x: re.sub(r'[\\n \\r \\t]','',x.strip()), content))
+        # content = list(filter(None, content))
+        # contentItem['content'] = ';'.join(content)
+
         contentItem = linkBodyItem()
         # body:二进制类型   text:string类型      包含' \r \n \t \
         tmp = response.text
@@ -113,8 +121,8 @@ class GoogleSpider(scrapy.Spider):
         
         
     def start_requests(self):
-        for keyword in self.settings.get('KEYWORDS'):            
-            for page in range(0, self.settings.get('MAX_PAGE')):
-                url = self.start_urls + quote(keyword) + '&start=' + quote(str(page*10))
-                print(url)
-                yield Request(url=url, callback=lambda response, key=keyword :self.parse(response, key),dont_filter=True)
+        for keyword in self.settings.get('KEYWORDS'):
+            for page in range(1, self.settings.get('MAX_PAGE')+1):
+                url = self.start_urls + quote(keyword)
+                yield Request(url=url, callback=lambda response, key=keyword :self.parse(response, key), meta={'page':page},dont_filter=True)
+
