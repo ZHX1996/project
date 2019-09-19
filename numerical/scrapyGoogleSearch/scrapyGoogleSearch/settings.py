@@ -13,13 +13,24 @@ BOT_NAME = 'scrapyGoogleSearch'
 
 SPIDER_MODULES = ['scrapyGoogleSearch.spiders']
 NEWSPIDER_MODULE = 'scrapyGoogleSearch.spiders'
+LOG_LEVEL = 'ERROR'
 
-KEYWORDS = ['人权观察']
+KEYWORDS = ['保尔森基金会','德国海因里希伯尔基金会']
+
+NGO_FILE = "C://Users/Administrator.SC-201905252025/Desktop/NGO.xlsx"
+COLUMNS_NAME = ['外文名称','中文名称']
 WEBSITE_HIGH = ['wikipedia','twitter','youtube','bbc','baike','facebook']
+
 MAX_PAGE = 2
 MONGO_URL = 'localhost'
 MONGO_DB = 'GoogleSearch'
 FEED_EXPORT_ENCODING = 'utf-8'
+
+MYSQL_HOST = 'localhost'
+MYSQL_PORT = 3306
+MYSQL_USER = 'root'
+MYSQL_PASSWORD = '123456'
+MYSQL_DB = 'GoogleSearch'
 
 SELENIUM_TIMEOUT = 20
 
@@ -30,8 +41,9 @@ DOWNLOADER_MIDDLEWARES = {
 AGENTS = 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.0.1594 Safari/537.36'
 
 ITEM_PIPELINES = {
-    'scrapyGoogleSearch.pipelines.MongodbPipeline': 300,
+    # 'scrapyGoogleSearch.pipelines.MongodbPipeline': 300,
     # 'scrapyGoogleSearch.pipelines.Pipeline_ToCSV': 100,
+    'scrapyGoogleSearch.pipelines.MySQLPipeline': 300,
 }
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent

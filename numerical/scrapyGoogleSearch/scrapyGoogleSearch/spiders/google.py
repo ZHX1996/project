@@ -7,14 +7,15 @@ from scrapy.shell import inspect_response
 import re
 import json
 import html
-import chardet
+import time
+import pandas as pd
+import logging
 
 
 class GoogleSpider(scrapy.Spider):
     name = 'google'
     allowed_domains = ['www.google.com']
     start_urls = 'https://www.google.com/search?q='
-
 
     def parse(self, response, key):
         # inspect_response(response, self)
@@ -25,20 +26,19 @@ class GoogleSpider(scrapy.Spider):
             title = product.xpath('//div[@class="rc"]/div[@class="r"]/a[1]/h3/div/text()').extract()
             break
 
-        print('\n')
-        print(address)
-        print(title)
-        print('\n')
         title = [x.replace('.','') for x in title]
+        title = [x.replace('"',"'") for x in title]
         item = ScrapygooglesearchItem()
-        item['title'] = ';'.join(title)
-        item['address'] = ';'.join(address)
+        item['title'] = '$'.join(title)
+        item['address'] = '$'.join(address)
         item['key'] = key
         yield item
 
         for i in range(min(len(title),len(address))):
-            yield Request(url = address[i], callback=lambda response, key=key, title=title[i]: self.parse_body(response, key,  title), dont_filter=True)
-
+            if not address[i].endswith(('pdf', 'PDF')):
+                yield Request(url = address[i], callback=lambda response, key=key, title=title[i]: self.parse_body(response, key,  title), dont_filter=True)
+            else:
+                print("pdf file: " + address[i])
 
     def parse_body(self, response, key, title):
         contentItem = linkBodyItem()
@@ -56,25 +56,15 @@ class GoogleSpider(scrapy.Spider):
         tmp = pattern.sub(r'', tmp)
         pattern = re.compile(r'<scip.*?</scip>', re.DOTALL)
         tmp = pattern.sub(r'', tmp)
+        pattern = re.compile(r'<style.*?</style>', re.DOTALL)
+        tmp = pattern.sub(r'', tmp)
         # pattern = re.compile(r'<.*?</[\w\W]*?>', re.DOTALL)
         # tmp = pattern.sub(r'', tmp)
         pattern = re.compile(r'<[\w\W]*?>')
         tmp = pattern.sub(r'', tmp)
 
-
-        # r = response.text
-        # con = html.unescape(r)
-        # pattern = re.compile(r'<script.*?</script>')
-        # con = pattern.sub(r'', con)
-        # pattern = re.compile(r'<scip.*?</scip>')
-        # con = pattern.sub(r'', con)
-        # def remove_rub(string):
-        #     rub = re.findall(r'<[\w\W]*?>',string)  #去掉<>里面的所有代码，因为数据没有在标签的<>里面，
-        #     for r in rub:
-        #         string = string.replace(r,'')
-        #     return(string.replace('\t','').replace('\r',''))  #去掉  \t 和回车
-        # all_data = remove_rub(con)
-        # all_data = "".join([s for s in all_data.splitlines(True) if s.strip()])
+        tmp = re.sub(r'\n+', '\n', tmp)
+        tmp = " ".join(tmp.split())
 
         contentItem['content'] = tmp
         contentItem['key'] = key
@@ -83,7 +73,7 @@ class GoogleSpider(scrapy.Spider):
 
         str2 = ""
         if "baike.baidu.com" in response.url:
-            contentItem['intro'] = ''.join(response.xpath('//div[@class="lemma-summary"]/div[@class="para"]/text()[1]').extract())
+            contentItem['intro'] = ''.join(response.xpath('//div[@class="lemma-summary"]//div//text()').extract())
         elif "wikipedia.org" in response.url:                   
             contentItem['intro'] = ''.join(response.xpath('//div[@id="mw-content-text"]/div/p[1]//text()').extract())
         elif 'facebook.com' in response.url:
@@ -113,8 +103,15 @@ class GoogleSpider(scrapy.Spider):
         
         
     def start_requests(self):
-        for keyword in self.settings.get('KEYWORDS'):            
+        logger = logging.getLogger(__name__)
+        # logger.error("the log level is error")
+        logger.warning("the log level is warning")
+
+        file = pd.read_excel(self.settings.get('NGO_FILE'),sheet_name='Sheet1', names=self.settings.get('COLUMNS_NAME') )
+        df = pd.DataFrame(file)
+        df['中文名称'].fillna(df['外文名称'], inplace=True)
+        for keyword in df['中文名称'].tolist():
+        # for keyword in self.settings.get('KEYWORDS'):
             for page in range(0, self.settings.get('MAX_PAGE')):
                 url = self.start_urls + quote(keyword) + '&start=' + quote(str(page*10))
-                print(url)
                 yield Request(url=url, callback=lambda response, key=keyword :self.parse(response, key),dont_filter=True)
