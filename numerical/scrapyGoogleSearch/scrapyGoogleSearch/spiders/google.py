@@ -40,11 +40,7 @@ class GoogleSpider(scrapy.Spider):
             else:
                 print("pdf file: " + address[i])
 
-    def parse_body(self, response, key, title):
-        contentItem = linkBodyItem()
-        # body:二进制类型   text:string类型      包含' \r \n \t \
-        tmp = response.text
-
+    def processInfo(self, tmp):
         # tmp = re.sub(r'\n', '', tmp)
         tmp = re.sub(r'\r', '', tmp)
         tmp = re.sub(r'\t', '', tmp)
@@ -63,8 +59,24 @@ class GoogleSpider(scrapy.Spider):
         pattern = re.compile(r'<[\w\W]*?>')
         tmp = pattern.sub(r'', tmp)
 
+        # 去除4字节字符
+        try:
+            pattern = re.compile(u'[\U00010000-\U0010ffff]')
+        except re.error:
+            pattern = re.compile(u'[\uD800-\uDBFF][\uDC00-\uDFFF]')
+        tmp = pattern.sub(u'',tmp)
+
         tmp = re.sub(r'\n+', '\n', tmp)
         tmp = " ".join(tmp.split())
+        return tmp
+
+
+    def parse_body(self, response, key, title):
+        contentItem = linkBodyItem()
+        # body:二进制类型   text:string类型      包含' \r \n \t \
+        tmp = response.text
+
+        tmp = self.processInfo(tmp)
 
         contentItem['content'] = tmp
         contentItem['key'] = key
@@ -73,9 +85,9 @@ class GoogleSpider(scrapy.Spider):
 
         str2 = ""
         if "baike.baidu.com" in response.url:
-            contentItem['intro'] = ''.join(response.xpath('//div[@class="lemma-summary"]//div//text()').extract())
+            contentItem['intro'] = self.processInfo(''.join(response.xpath('//div[@class="lemma-summary"]//div//text()').extract()))
         elif "wikipedia.org" in response.url:                   
-            contentItem['intro'] = ''.join(response.xpath('//div[@id="mw-content-text"]/div/p[1]//text()').extract())
+            contentItem['intro'] = self.processInfo(''.join(response.xpath('//div[@id="mw-content-text"]/div/p[1]//text()').extract()))
         elif 'facebook.com' in response.url:
             str1 = response.url
             k = str1.find('/', 25)
@@ -85,7 +97,7 @@ class GoogleSpider(scrapy.Spider):
         elif 'twitter.com' in response.url:
             # //*[@id="react-root"]/div/div/div/main/div/div[2]/div/div/div/div/div[2]/div/div/div[1]/div/div[3]/div//text()  登录
             # //*[@id="page-container"]/div[2]/div/div/div[1]/div/div/div/div[1]/p//text()   未登录
-            contentItem['intro'] = ''.join(response.xpath('//*[@id="page-container"]/div[2]/div/div/div[1]/div/div/div/div[1]/p//text()').extract())
+            contentItem['intro'] = self.processInfo(''.join(response.xpath('//*[@id="page-container"]/div[2]/div/div/div[1]/div/div/div/div[1]/p//text()').extract()))
         else:
             contentItem['intro'] = " "
 
@@ -98,14 +110,14 @@ class GoogleSpider(scrapy.Spider):
         facebookintroItem['key'] = key
         facebookintroItem['title'] = title
         facebookintroItem['address'] = address
-        facebookintroItem['intro'] = ''.join(response.xpath('//*[@id="PagesProfileAboutInfoPagelet_152100711485335"]/div[3]/div[1]/div/div[3]//div[@class="_5aj7 _3-8j"]//text()').extract())
+        facebookintroItem['intro'] = self.processInfo(''.join(response.xpath('//*[@id="PagesProfileAboutInfoPagelet_152100711485335"]/div[3]/div[1]/div/div[3]//div[@class="_5aj7 _3-8j"]//text()').extract()))
         yield facebookintroItem
         
         
     def start_requests(self):
         logger = logging.getLogger(__name__)
         # logger.error("the log level is error")
-        logger.warning("the log level is warning")
+        logger.warn("the log level is warning")
 
         file = pd.read_excel(self.settings.get('NGO_FILE'),sheet_name='Sheet1', names=self.settings.get('COLUMNS_NAME') )
         df = pd.DataFrame(file)
