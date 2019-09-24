@@ -61,10 +61,11 @@ class MySQLPipeline(object):
         df['中文名称'].fillna(df['外文名称'], inplace=True)
         for keyword in df['中文名称'].tolist():
             if tableNames.find(keyword) == -1:
-                sql = 'create table `' + keyword + '` (`title` varchar(20) not null, `address` varchar(50), `content` varchar(300), `intro` varchar(50))'
+                sql = 'create table `' + keyword + '` (`title` varchar(100) not null, `address` varchar(600), `content` mediumtext, `intro` varchar(2500))'
             else:
                 sql = 'truncate table `' + keyword + '`'
             self.cursor.execute(sql)
+            self.connection.commit()
                 
     def process_item(self, item, spider):
         if isinstance(item, ScrapygooglesearchItem):
@@ -72,16 +73,43 @@ class MySQLPipeline(object):
             self.address = item['address'].split('$')
 
             for i in range(len(self.title)):
-                sql = 'insert into `' + item['key'] + '` (title,address) values (' + self.title[i] +',' + self.address[i] + ')'
-                self.cursor.execute(sql)
+                # sql = 'insert into `' + item["key"] + '` (title,address) values (' + '"' + self.title[i] +'","' + self.address[i] + '")'
+                # 不用
+                # sql = "insert into `" + item["key"] + "` (title,address) values (" + "'" + self.title[i] +"','" + self.address[i] + "')"
+                # self.cursor.execute(sql)
+
+                # self.cursor.execute('insert into %s (title, address) values (%s, %s)', (item['key'],self.title[i],self.address[i]))
+
+                sql = 'insert into `' + item["key"] + '` (title, address) values (%s, %s)'
+                self.cursor.execute(sql, (self.title[i],self.address[i]))
+                self.connection.commit()
+
 
         if isinstance(item, linkBodyItem):
-            sql = 'update `' + item['key'] + '` set content=' + item['content'] + ', intro=' + item['intro'] + 'where title=' + item['title'] 
-            self.cursor.execute(sql)
+            # sql = 'update `' + item['key'] + '` set content="' + item['content'] + '", intro="' + item['intro'] + '" where title="' + item['title'] + '"'
+            # 不用
+            # sql = "update `" + item['key'] + "` set content='" + item['content'] + "', intro='" + item['intro'] + "' where title='" + item['title'] + "'"
+            # self.cursor.execute(sql)
+
+            # self.cursor.execute('update %s set content=%s, intro=%s where title=%s', (item['key'], item['content'], item['intro'], item['title']))
+
+            sql = 'update `' + item['key'] + '` set content=%s, intro=%s where title=%s'
+            self.cursor.execute(sql, (item['content'], item['intro'], item['title']))
+
+            self.connection.commit()
 
         if isinstance(item, facebookIntroItem):
-            sql = 'update `' + item['key'] + '` set intro=' + item['intro'] + 'where title=' + item['title'] 
-            self.cursor.execute(sql)
+            # sql = 'update `' + item['key'] + '` set intro="' + item['intro'] + '" where title="' + item['title'] + '"' 
+            # 不用
+            # sql = "update `" + item['key'] + "` set intro='" + item['intro'] + "' where title='" + item['title'] + "'"
+            # self.cursor.execute(sql)
+
+            # self.cursor.execute('update %s set intro=%s where title=%s', (item['key'], item['intro'], item['title']))
+
+            sql = 'update `' + item['key'] + '` set intro=%s where title=%s'
+            self.cursor.execute(sql, (item['intro'], item['title']))
+            self.connection.commit()
+
 
     def close_spider(self, spider):
         self.cursor.close()
