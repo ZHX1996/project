@@ -25,6 +25,7 @@ class linkBodyItem(scrapy.Item):
     title = Field()
     intro = Field()
     address = Field()
+    category = Field()
 
 class facebookIntroItem(scrapy.Item):
     title = Field()

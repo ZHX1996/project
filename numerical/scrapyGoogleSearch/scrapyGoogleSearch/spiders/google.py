@@ -23,7 +23,7 @@ class GoogleSpider(scrapy.Spider):
         products = response.xpath('//div[@id="rso"]/div/div[contains(@class,"srg")]/div[contains(@class,"g")]')
         for product in products:
             address = product.xpath('//div[@class="rc"]/div[@class="r"]/a[1]/@href').extract()
-            title = product.xpath('//div[@class="rc"]/div[@class="r"]/a[1]/h3/div/text()').extract()
+            title = product.xpath('//div[@class="rc"]/div[@class="r"]/a[1]/h3/text()').extract()
             break
 
         title = [x.replace('.','') for x in title]
@@ -82,24 +82,41 @@ class GoogleSpider(scrapy.Spider):
         contentItem['key'] = key
         contentItem['title'] = title
         contentItem['address'] = response.url
+        contentItem['intro'] = ' '
 
         str2 = ""
         if "baike.baidu.com" in response.url:
+            contentItem['category'] = '百度百科'
             contentItem['intro'] = self.processInfo(''.join(response.xpath('//div[@class="lemma-summary"]//div//text()').extract()))
-        elif "wikipedia.org" in response.url:                   
+        elif "wikipedia.org" in response.url:    
+            contentItem['category'] = '维基百科'               
             contentItem['intro'] = self.processInfo(''.join(response.xpath('//div[@id="mw-content-text"]/div/p[1]//text()').extract()))
         elif 'facebook.com' in response.url:
             str1 = response.url
             k = str1.find('/', 25)
             m = str1.find('/', 8)
             str2 = str1[:m+1] + 'pg' + str1[m:k+1] + 'about/'
+            contentItem['category'] = '脸书'
             contentItem['intro'] = str2
         elif 'twitter.com' in response.url:
             # //*[@id="react-root"]/div/div/div/main/div/div[2]/div/div/div/div/div[2]/div/div/div[1]/div/div[3]/div//text()  登录
             # //*[@id="page-container"]/div[2]/div/div/div[1]/div/div/div/div[1]/p//text()   未登录
+            contentItem['category'] = '推特'
             contentItem['intro'] = self.processInfo(''.join(response.xpath('//*[@id="page-container"]/div[2]/div/div/div[1]/div/div/div/div[1]/p//text()').extract()))
+        elif 'linkedin' in response.url:
+            contentItem['category'] = '领英'
+        elif 'weibo' in response.url:
+            contentItem['category'] = '微博'
+        elif 'blog' in response.url:
+            contentItem['category'] = '博客'
+        elif self.isContain(['zhaopin','kanzhun'], response.url):
+            contentItem['category'] = '招聘'
+        elif self.isContain(['youku','tudou'], response.url):
+            contentItem['category'] = '视频'
+        elif self.isContain(['ifeng', 'finance.sina', 'business.sohu', 'new.qq','dooo'], response.url):
+            contentItem['category'] = '新闻'
         else:
-            contentItem['intro'] = " "
+            contentItem['category'] = '其它'
 
         yield contentItem
         if str2 !="":
@@ -110,8 +127,14 @@ class GoogleSpider(scrapy.Spider):
         facebookintroItem['key'] = key
         facebookintroItem['title'] = title
         facebookintroItem['address'] = address
-        facebookintroItem['intro'] = self.processInfo(''.join(response.xpath('//*[@id="PagesProfileAboutInfoPagelet_152100711485335"]/div[3]/div[1]/div/div[3]//div[@class="_5aj7 _3-8j"]//text()').extract()))
+        facebookintroItem['intro'] = self.processInfo(' '.join(response.xpath('//div[@role="main"]//text()').extract()))
         yield facebookintroItem
+
+    def isContain(self, ic_li, ic_url):
+        for i in ic_li:
+            if i in ic_url:
+                return True
+        return False
         
         
     def start_requests(self):
