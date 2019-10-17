@@ -32,3 +32,11 @@ class facebookIntroItem(scrapy.Item):
     address = Field()
     key = Field()
     intro = Field()
+
+class officialIntroItem(scrapy.Item):
+    title = Field()
+    address = Field()
+    key = Field()
+    category = Field()
+    content = Field()
+    intro = Field()

@@ -2,7 +2,7 @@
 import scrapy
 from scrapy import Request, Spider
 from urllib.parse import quote
-from scrapyGoogleSearch.items import ScrapygooglesearchItem, linkBodyItem, facebookIntroItem
+from scrapyGoogleSearch.items import ScrapygooglesearchItem, linkBodyItem, facebookIntroItem, officialIntroItem
 from scrapy.shell import inspect_response
 import re
 import json
@@ -39,6 +39,39 @@ class GoogleSpider(scrapy.Spider):
                 yield Request(url = address[i], callback=lambda response, key=key, title=title[i]: self.parse_body(response, key,  title), dont_filter=True)
             else:
                 print("pdf file: " + address[i])
+
+        tmp = 'https://www.google.com/search?as_q=' + key + '&as_epq=&as_oq=关于+是&as_eq=中国发展简报+环球+twitter+facebook+百科+意思&as_nlo=&as_nhi=&lr=&cr=&as_qdr=all&as_sitesearch=&as_occt=title&safe=images&as_filetype=&as_rights='
+        yield Request(url=tmp, callback=lambda response,key=key,title=title,address=address: self.getFirstResult(response,key,title,address), dont_filter=True)
+
+    def getFirstResult(self, response, key, title, address):
+        link = response.xpath("//div[@id='main']//div[3]//a[1]//@href").extract()
+        # res =  '/url?q=https://www.salvationarmy.org.hk/cn/about_us&sa=U&ved=2ahUKEwjXuMW416LlAhVIqZ4KHUD7Dp8QFjAAegQIARAB&usg=AOvVaw2_IWZuQk5duHOt7hzTrUER'
+
+        pattern = re.compile(r'.*?\?q=(.*?)&sa=.*?')
+        m = pattern.match(link[1])
+
+        pattern1 = re.compile(r'.*?www\.(.*)\..*?')
+        target = pattern1.match(m).group(1)
+        
+
+        for i in range(len(address)):
+            # tmp = 'https://www.salvationarmy.org.hk/cn/about_us'
+            source = pattern1.match(address[i]).group(1)
+            if source == target:
+                yield Request(url=m, callback=lambda response,key=key,title=title[i]: self.parse_officialIntro(response,key,title), dont_filter=True)
+
+
+    def parse_officialIntro(self, response, key, title):
+        item = officialIntroItem()
+        tmp = response.text
+
+        item['intro'] = response.url + '\n' + self.processInfo(tmp)
+        # item['address'] = response.url
+        # item['category'] = '官网介绍'
+        item['key'] = key
+        item['title'] = title
+        yield officialIntroItem()
+
 
     def processInfo(self, tmp):
         # tmp = re.sub(r'\n', '', tmp)
