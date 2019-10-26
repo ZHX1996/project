@@ -8,7 +8,7 @@ import pymongo
 import json
 import codecs
 import csv
-from scrapyGoogleSearch.items import ScrapygooglesearchItem, linkBodyItem, facebookIntroItem
+from scrapyGoogleSearch.items import ScrapygooglesearchItem, linkBodyItem, facebookIntroItem, officialIntroItem
 import re
 import pymysql
 import pandas as pd
@@ -56,7 +56,7 @@ class MySQLPipeline(object):
         tableNames = str(tableNames) 
 
         if tableNames.find('result') == -1:
-            sql = 'create table `result` (`title` varchar(100) not null, `keywords` varchar(50), `category` varchar(10),  `address` varchar(600), `content` mediumtext, `intro` varchar(2500))'
+            sql = 'create table `result` (`title` varchar(200) not null, `keywords` varchar(50), `category` varchar(10),  `address` varchar(1000), `content` mediumtext, `intro` varchar(3500))'
         else:
             sql = 'truncate table `result`'
         self.cursor.execute(sql)
@@ -64,8 +64,8 @@ class MySQLPipeline(object):
                 
     def process_item(self, item, spider):
         if isinstance(item, ScrapygooglesearchItem):
-            self.title = item['title'].split('$')
-            self.address = item['address'].split('$')
+            self.title = item['title'].split('$$')
+            self.address = item['address'].split('$$')
 
             for i in range(len(self.title)):
                 sql = 'insert into `result` (keywords, title, address) values (%s, %s, %s)'
@@ -76,12 +76,17 @@ class MySQLPipeline(object):
         if isinstance(item, linkBodyItem):
             sql = 'update `result` set category=%s, content=%s, intro=%s where title=%s'
             self.cursor.execute(sql, (item['category'], item['content'], item['intro'], item['title']))
-
             self.connection.commit()
 
         if isinstance(item, facebookIntroItem):
             sql = 'update `result` set intro=%s where title=%s'
             self.cursor.execute(sql, (item['intro'], item['title']))
+            self.connection.commit()
+
+        if isinstance(item, officialIntroItem):
+            # print("intro: " , item['intro'])
+            sql = "update `result` set `intro`=%s, `category`=%s where `title`=%s"
+            self.cursor.execute(sql, (item['intro'], item['category'], item['title']))
             self.connection.commit()
 
 

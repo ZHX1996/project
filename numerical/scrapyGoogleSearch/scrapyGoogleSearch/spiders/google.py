@@ -17,6 +17,7 @@ class GoogleSpider(scrapy.Spider):
     allowed_domains = ['www.google.com']
     start_urls = 'https://www.google.com/search?q='
 
+
     def parse(self, response, key):
         # inspect_response(response, self)
 
@@ -29,8 +30,8 @@ class GoogleSpider(scrapy.Spider):
         title = [x.replace('.','') for x in title]
         title = [x.replace('"',"'") for x in title]
         item = ScrapygooglesearchItem()
-        item['title'] = '$'.join(title)
-        item['address'] = '$'.join(address)
+        item['title'] = '$$'.join(title)
+        item['address'] = '$$'.join(address)
         item['key'] = key
         yield item
 
@@ -40,37 +41,56 @@ class GoogleSpider(scrapy.Spider):
             else:
                 print("pdf file: " + address[i])
 
-        tmp = 'https://www.google.com/search?as_q=' + key + '&as_epq=&as_oq=关于+是&as_eq=中国发展简报+环球+twitter+facebook+百科+意思&as_nlo=&as_nhi=&lr=&cr=&as_qdr=all&as_sitesearch=&as_occt=title&safe=images&as_filetype=&as_rights='
-        yield Request(url=tmp, callback=lambda response,key=key,title=title,address=address: self.getFirstResult(response,key,title,address), dont_filter=True)
+        
+
+        # tmp = 'https://www.google.com/search?as_q=' + key + '&as_epq=&as_oq=关于+是&as_eq=中国发展简报+环球+twitter+facebook+百科+意思&as_nlo=&as_nhi=&lr=&cr=&as_qdr=all&as_sitesearch=&as_occt=title&safe=images&as_filetype=&as_rights='
+        # # tmp = 'https://www.google.com/search?as_q=' + key + '+关于我们&as_epq=&as_oq=关于+是&as_eq=中国发展简报+环球+twitter+facebook+百科+意思&as_nlo=&as_nhi=&lr=&cr=&as_qdr=all&as_sitesearch=&as_occt=any&safe=active&as_filetype=&as_rights='
+        # yield Request(url=tmp, callback=lambda response,key=key,title=title,address=address: self.getFirstResult(response,key,title,address), dont_filter=True)
+
+    
 
     def getFirstResult(self, response, key, title, address):
-        link = response.xpath("//div[@id='main']//div[3]//a[1]//@href").extract()
+        # link = response.xpath("//div[@id='main']//div[3]//a[1]//@href").extract()
+        link = response.xpath('//div[@class="rc"]/div[@class="r"]/a[1]/@href').extract()
         # res =  '/url?q=https://www.salvationarmy.org.hk/cn/about_us&sa=U&ved=2ahUKEwjXuMW416LlAhVIqZ4KHUD7Dp8QFjAAegQIARAB&usg=AOvVaw2_IWZuQk5duHOt7hzTrUER'
 
-        pattern = re.compile(r'.*?\?q=(.*?)&sa=.*?')
-        m = pattern.match(link[1])
+        # pattern = re.compile(r'.*?\?q=(.*?)&sa=.*?')
+        # m = pattern.match(''.join(link)).group(1)
+
+        m = link[0]
+        # print("m: ", m)
 
         pattern1 = re.compile(r'.*?www\.(.*)\..*?')
         target = pattern1.match(m).group(1)
+        # print("target: ", target)
         
 
         for i in range(len(address)):
             # tmp = 'https://www.salvationarmy.org.hk/cn/about_us'
-            source = pattern1.match(address[i]).group(1)
-            if source == target:
-                yield Request(url=m, callback=lambda response,key=key,title=title[i]: self.parse_officialIntro(response,key,title), dont_filter=True)
+            try:
+                source = pattern1.match(address[i]).group(1)
+                # print("source: ", source)
+                if source == target:
+                    # print(key, title[i])
+                    yield Request(url=m, callback=lambda response,key=key,title=title[i]: self.parse_officialIntro(response,key,title), dont_filter=True)
+            except:
+                pass
 
 
     def parse_officialIntro(self, response, key, title):
-        item = officialIntroItem()
-        tmp = response.text
-
-        item['intro'] = response.url + '\n' + self.processInfo(tmp)
+        # print(2)
+        officialItem = officialIntroItem()
+        # tmp = response.text
+        # print(response.url)
+        officialItem['intro'] = response.url
+        # print(title, response.url)
         # item['address'] = response.url
         # item['category'] = '官网介绍'
-        item['key'] = key
-        item['title'] = title
-        yield officialIntroItem()
+        # officialItem['key'] = key
+        officialItem['title'] = title
+        officialItem['category'] = '官网'
+        # print(title, response.url)
+        yield officialItem
 
 
     def processInfo(self, tmp):
@@ -155,6 +175,7 @@ class GoogleSpider(scrapy.Spider):
         if str2 !="":
             yield Request(url = str2, callback=lambda response, key=key, title = title,address=str1: self.parse_facebook_intro(response,key,title,address), dont_filter=True)
 
+
     def parse_facebook_intro(self, response, key, title, address):
         facebookintroItem = facebookIntroItem()
         facebookintroItem['key'] = key
@@ -162,6 +183,7 @@ class GoogleSpider(scrapy.Spider):
         facebookintroItem['address'] = address
         facebookintroItem['intro'] = self.processInfo(' '.join(response.xpath('//div[@role="main"]//text()').extract()))
         yield facebookintroItem
+
 
     def isContain(self, ic_li, ic_url):
         for i in ic_li:
