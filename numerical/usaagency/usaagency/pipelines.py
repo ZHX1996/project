@@ -6,6 +6,40 @@
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 import pymysql
 from usaagency.items import UsaagencyItem, aboutItem
+from scrapy.exceptions import DropItem
+from scrapy.pipelines.images import ImagesPipeline
+from scrapy import Request
+
+
+class ImagePipeline(ImagesPipeline):
+    default_headers = {
+        "Sec-Fetch-Mode": "navigate",
+        "Sec-Fetch-User": "?1",
+        "Upgrade-Insecure-Requests": "1",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.87 Safari/537.36",
+    }
+
+    def file_path(self, request, response=None, info=None):
+        url = request.url
+        file_name = url.split('/')[-1]
+        return file_name
+
+    
+    def item_completed(self, results, item, info):
+        if isinstance(item, aboutItem):
+            image_paths = [x['path'] for ok, x in results if ok]
+            if not image_paths:
+                item['logo'] = item['logo_url']
+                # raise DropItem('failed')
+        return item
+
+
+    def get_media_requests(self, item, info):
+        if isinstance(item, aboutItem):
+            if item['logo_url'] != "" and item['logo_url'] != None:
+                self.default_headers['referer'] = item['logo_url']
+                yield Request(item['logo_url'], headers=self.default_headers)
+        
 
 
 class UsaagencyPipeline(object):
@@ -42,7 +76,7 @@ class UsaagencyPipeline(object):
         tableNames = str(tableNames) 
 
         if tableNames.find('agency') == -1:
-            sql = 'create table `agency` (`chineseName` varchar(50) not null, `englishName` varchar(50), `parentAgency` varchar(20),  `firstCategory` varchar(20), `secondCategory` varchar(20), `thirdCategory` varchar(20), `intro` varchar(400), `introZh` varchar(80), `firstLink` varchar(100), `linkAddress` varchar(200), `contact` varchar(150), `contactZh` varchar(150), `about` varchar(9000), `aboutZh` varchar(3000))'
+            sql = 'create table `agency` (`chineseName` varchar(50) not null, `englishName` varchar(100), `parentAgency` varchar(100),  `firstCategory` varchar(20), `secondCategory` varchar(20), `thirdCategory` varchar(20), `intro` varchar(400), `introZh` varchar(80), `firstLink` varchar(100), `linkAddress` varchar(200), `contact` varchar(150), `contactZh` varchar(150), `about` varchar(9000), `aboutZh` varchar(3000), `logo` varchar(200))'
         else:
             sql = 'truncate table `agency`'
         self.cursor.execute(sql)
@@ -55,9 +89,10 @@ class UsaagencyPipeline(object):
             self.connection.commit()
 
         if isinstance(item, aboutItem):
-            sql = 'update `agency` set about=%s, aboutZh=%s where chineseName=%s'
-            self.cursor.execute(sql, (item['about'], item['aboutZh'], item['chineseName']))
+            sql = 'update `agency` set about=%s, aboutZh=%s, logo=%s where linkAddress=%s'
+            self.cursor.execute(sql, (item['about'], item['aboutZh'], item['logo'], item['linkAddress']))
             self.connection.commit()
+        return item
 
 
     def close_spider(self, spider):

@@ -11,6 +11,8 @@ import pandas as pd
 import logging
 from usaagency.items import UsaagencyItem, aboutItem
 from googletrans import Translator
+import os
+from urllib.parse import urljoin
 
 
 class AgencySpider(scrapy.Spider):
@@ -54,25 +56,43 @@ class AgencySpider(scrapy.Spider):
         
         tmp = "about " + englishName
         url = "https://www.google.com/search?q=" + "+".join(tmp.split(' '))
-        yield Request(url=url, callback = lambda response, chineseName=chineseName: self.parse_link(response, chineseName), dont_filter=True)
+        yield Request(url=url, callback = lambda response, linkAddress=item_1['linkAddress']: self.parse_link(response, linkAddress), dont_filter=True)
         
 
-    def parse_link(self, response, chineseName):
+    def parse_link(self, response, linkAddress):
         links = response.xpath('//div[@class="rc"]/div[@class="r"]//a//@href').extract()
         links.sort(key = lambda i:len(i),reverse=False) 
         for link in links:
             if "about" in link:
                 # print("\n\n")
-                yield Request(url=link, callback=lambda response, chineseName=chineseName: self.parse_about(response, chineseName), dont_filter=True)
+                yield Request(url=link, callback=lambda response, linkAddress=linkAddress: self.parse_about(response, linkAddress), dont_filter=True)
                 break
 
 
-    def parse_about(self, response, chineseName):
+    def parse_about(self, response, linkAddress):
         item_2 = aboutItem()
-        item_2['chineseName'] = chineseName
+
+        item_2['logo'] = ""
+        item_2['logo_url'] = ""
+        item_2['linkAddress'] = linkAddress
         about = self.process_about(response.text)
         item_2['about'] = about
         item_2['aboutZh'] = self.trans.translate(about, dest='zh-CN').text
+        root_path = os.path.abspath(self.settings.get('IMAGES_STORE'))
+
+        img_list = response.xpath("//div//img//@src").extract()[::-1]
+        for i in range(len(img_list)):
+            if 'logo' in img_list[i] or 'symbol' in img_list[i]:
+                if 'http' not in img_list[i]:
+                    # tmp = linkAddress[:-1] + img_list[i]
+                    tmp = urljoin(linkAddress, img_list[i])
+                else:
+                    tmp = img_list[i]
+                if 'https' not in tmp:
+                    tmp = re.sub(r'http', 'https', tmp)
+                item_2['logo_url'] = tmp
+                item_2['logo'] = os.path.join(root_path, img_list[i].split('/')[-1])
+                break
         yield item_2
 
 
@@ -117,7 +137,7 @@ class AgencySpider(scrapy.Spider):
         logger.error("the log level is error")
         # logger.warn("the log level is warning")
 
-        file = pd.read_excel(self.settings.get('FILE_NAME'),sheet_name='Sheet2', names=self.settings.get('COLUMNS_NAME') )
+        file = pd.read_excel(self.settings.get('FILE_NAME'),sheet_name='Sheet1', names=self.settings.get('COLUMNS_NAME') )
         df = pd.DataFrame(file)
         for i in range(len(df)):
             url = df.iloc[i]['一级链接']

@@ -19,14 +19,15 @@ class UsaagencyItem(scrapy.Item):
     englishName = Field()
     firstLink = Field()
     linkAddress = Field()
-    parentAgency = Field()
-    # about = Field()
+    parentAgency = Field() 
     contact = Field()
     contactZh = Field()
     intro = Field()
     introZh = Field()
 
 class aboutItem(scrapy.Item):
-    chineseName = Field()
+    linkAddress = Field()
     about = Field()
     aboutZh = Field()
+    logo = Field()
+    logo_url = Field()

@@ -14,9 +14,10 @@ BOT_NAME = 'usaagency'
 SPIDER_MODULES = ['usaagency.spiders']
 NEWSPIDER_MODULE = 'usaagency.spiders'
 
-FILE_NAME = 'E:/project/numerical/usaagency/usaagency/1.xlsx'
-RESULT_FILE = 'E:/project/numerical/usaagency/usaagency/result.xlsx'
+FILE_NAME = './1.xlsx'
 COLUMN_NAME = ['一级类别','二级类别','三级类别','英文名称','中文名称','一级链接']
+
+IMAGES_STORE = './logo'
 
 MYSQL_HOST = 'localhost'
 MYSQL_PORT = 3306
@@ -25,7 +26,8 @@ MYSQL_PASSWORD = '123456'
 MYSQL_DB = 'googlesearch'
 
 ITEM_PIPELINES = {
-   'usaagency.pipelines.UsaagencyPipeline': 300,
+   'usaagency.pipelines.UsaagencyPipeline': 302,
+   'usaagency.pipelines.ImagePipeline': 301,
 }
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
