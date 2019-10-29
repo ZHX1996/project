@@ -1,6 +1,7 @@
 *.csv
 *.tsv
 *.class
+*.xlsx
 *.pkl
 *.gz
 *.zip
