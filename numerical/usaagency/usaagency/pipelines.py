@@ -76,7 +76,7 @@ class UsaagencyPipeline(object):
         tableNames = str(tableNames) 
 
         if tableNames.find('agency') == -1:
-            sql = 'create table `agency` (`chineseName` varchar(50) not null, `englishName` varchar(100), `parentAgency` varchar(100),  `firstCategory` varchar(20), `secondCategory` varchar(20), `thirdCategory` varchar(20), `intro` varchar(400), `introZh` varchar(80), `firstLink` varchar(100), `linkAddress` varchar(200), `contact` varchar(150), `contactZh` varchar(150), `about` varchar(9000), `aboutZh` varchar(3000), `logo` varchar(200))'
+            sql = 'create table `agency` (`chineseName` varchar(50) not null, `englishName` varchar(100), `parentAgency` varchar(100),  `firstCategory` varchar(20), `secondCategory` varchar(20), `thirdCategory` varchar(20), `intro` varchar(400), `introZh` varchar(200), `firstLink` varchar(100), `linkAddress` varchar(200), `contact` varchar(300), `contactZh` varchar(300), `about` varchar(9800), `aboutZh` varchar(4500), `logo` varchar(200))'
         else:
             sql = 'truncate table `agency`'
         self.cursor.execute(sql)
@@ -85,8 +85,14 @@ class UsaagencyPipeline(object):
     def process_item(self, item, spider):
         if isinstance(item, UsaagencyItem):
             sql = 'insert into `agency` (chineseName, englishName, parentAgency, firstCategory, secondCategory, thirdCategory, intro, introZh, firstLink, linkAddress, contact, contactZh) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
-            self.cursor.execute(sql, (item['chineseName'],item['englishName'],item['parentAgency'],item['firstCategory'],item['secondCategory'],item['thirdCategory'],item['intro'],item['introZh'],item['firstLink'],item['linkAddress'],item['contact'],item['contactZh']))
-            self.connection.commit()
+            try:
+                self.cursor.execute(sql, (item['chineseName'],item['englishName'],item['parentAgency'],item['firstCategory'],item['secondCategory'],item['thirdCategory'],item['intro'],item['introZh'],item['firstLink'],item['linkAddress'],item['contact'],item['contactZh']))
+                self.connection.commit()
+            except:
+                item['about'] = ""
+                self.cursor.execute(sql, (item['chineseName'],item['englishName'],item['parentAgency'],item['firstCategory'],item['secondCategory'],item['thirdCategory'],item['intro'],item['introZh'],item['firstLink'],item['linkAddress'],item['contact'],item['contactZh']))
+                self.connection.commit()
+
 
         if isinstance(item, aboutItem):
             sql = 'update `agency` set about=%s, aboutZh=%s, logo=%s where linkAddress=%s'

@@ -30,7 +30,7 @@ class AgencySpider(scrapy.Spider):
         item_1['chineseName'] = chineseName
         item_1['englishName'] = englishName
         item_1['firstLink'] = response.url
-        item_1['linkAddress'],item_1['contact'],item_1['contactZh'],item_1['intro'],item_1['introZh'] = "","","","",""
+        item_1['linkAddress'],item_1['contact'],item_1['contactZh'],item_1['intro'],item_1['introZh'], item_1['parentAgency'] = "","","","","",""
         address, number, tollfree = [],[],[]
         
         item_1['intro'] = "".join(response.xpath('//*[@id="content"]/div/div/article/header[1]/p//text()').extract())
@@ -39,7 +39,10 @@ class AgencySpider(scrapy.Spider):
         sections = response.xpath("//*[@id='content']/div/div/article//section")
         for section in sections:
             if "Website" in "".join(section.xpath('header/h3/text()').extract()):
-                item_1['linkAddress'] = section.xpath('p/a/@href').extract()[0]
+                try:
+                    item_1['linkAddress'] = section.xpath('p/a/@href').extract()[0]
+                except:
+                    pass
             if "Main Address" in "".join(section.xpath('header/h3/text()').extract()):
                 address = section.xpath('p//text()').extract()
             if "Phone Number" in "".join(section.xpath('header/h3/text()').extract()):
@@ -80,7 +83,7 @@ class AgencySpider(scrapy.Spider):
         item_2['aboutZh'] = self.trans.translate(about, dest='zh-CN').text
         root_path = os.path.abspath(self.settings.get('IMAGES_STORE'))
 
-        img_list = response.xpath("//div//img//@src").extract()[::-1]
+        img_list = response.xpath("//div//img//@src").extract()
         for i in range(len(img_list)):
             if 'logo' in img_list[i] or 'symbol' in img_list[i]:
                 if 'http' not in img_list[i]:
