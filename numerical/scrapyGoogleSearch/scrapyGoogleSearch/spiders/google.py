@@ -197,11 +197,27 @@ class GoogleSpider(scrapy.Spider):
         # logger.error("the log level is error")
         logger.warn("the log level is warning")
 
-        file = pd.read_excel(self.settings.get('NGO_FILE'),sheet_name='Sheet1', names=self.settings.get('COLUMNS_NAME') )
-        df = pd.DataFrame(file)
-        df['中文名称'].fillna(df['外文名称'], inplace=True)
-        for keyword in df['中文名称'].tolist():
+        import os
+        # print(os.path.abspath("./"))
+        f = open("./scrapyGoogleSearch/spiders/NGO.txt", 'r', encoding='utf-8')
+        li = f.readlines()
+        li = list(map(lambda x: x.strip(), li))
+        f.close()
+
+        f = open("./scrapyGoogleSearch/spiders/alread.txt", 'r', encoding='utf-8')
+        alread = f.readlines()
+        alread = list(map(lambda x: x.strip(), alread))
+        last = [x for x in li if x not in alread]
+
+        # print(len(last))
+
+        # file = pd.read_excel(self.settings.get('NGO_FILE'),sheet_name='Sheet1', names=self.settings.get('COLUMNS_NAME') )
+        # df = pd.DataFrame(file)
+        # df['中文名称'].fillna(df['外文名称'], inplace=True)
+        # for keyword in df['中文名称'].tolist():
         # for keyword in self.settings.get('KEYWORDS'):
+
+        for keyword in last:
             for page in range(0, self.settings.get('MAX_PAGE')):
                 url = self.start_urls + quote(keyword) + '&start=' + quote(str(page*10))
                 yield Request(url=url, callback=lambda response, key=keyword :self.parse(response, key),dont_filter=True)

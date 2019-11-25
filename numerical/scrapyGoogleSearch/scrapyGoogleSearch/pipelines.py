@@ -51,16 +51,16 @@ class MySQLPipeline(object):
         )
 
         self.cursor = self.connection.cursor()
-        self.cursor.execute('show tables;')
-        tableNames = [self.cursor.fetchall()] 
-        tableNames = str(tableNames) 
+        # self.cursor.execute('show tables;')
+        # tableNames = [self.cursor.fetchall()] 
+        # tableNames = str(tableNames) 
 
-        if tableNames.find('result') == -1:
-            sql = 'create table `result` (`title` varchar(200) not null, `keywords` varchar(50), `category` varchar(10),  `address` varchar(1000), `content` mediumtext, `intro` varchar(3500))'
-        else:
-            sql = 'truncate table `result`'
-        self.cursor.execute(sql)
-        self.connection.commit()
+        # if tableNames.find('result') == -1:
+        #     sql = 'create table `result` (`title` varchar(200) not null, `keywords` varchar(50), `category` varchar(10),  `address` varchar(1000), `content` mediumtext, `intro` varchar(3500))'
+        # else:
+        #     sql = 'truncate table `result`'
+        # self.cursor.execute(sql)
+        # self.connection.commit()
                 
     def process_item(self, item, spider):
         if isinstance(item, ScrapygooglesearchItem):

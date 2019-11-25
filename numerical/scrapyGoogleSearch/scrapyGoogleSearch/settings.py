@@ -17,8 +17,8 @@ LOG_LEVEL = 'ERROR'
 
 KEYWORDS = ['保尔森基金会','德国海因里希伯尔基金会']
 
-NGO_FILE = "C://Users/Administrator.SC-201905252025/Desktop/NGO.xlsx"
-COLUMNS_NAME = ['外文名称','中文名称']
+# NGO_FILE = "C://Users/Administrator.SC-201905252025/Desktop/NGO.xlsx"
+# COLUMNS_NAME = ['外文名称','中文名称']
 WEBSITE_HIGH = ['wikipedia','twitter','youtube','bbc','baike','facebook']
 
 MAX_PAGE = 2
